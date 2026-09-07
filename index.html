@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Hiren Suthar — Full Stack Developer building modern, scalable, and high-performance web applications.">
+  <title>Hiren Suthar — Full Stack Developer</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@v2.16.0/devicon.min.css">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- ========== NAVIGATION ========== -->
+  <nav class="nav" id="nav">
+    <div class="container nav__inner">
+      <a href="#home" class="nav__logo">
+        <span class="clr-accent">&lt;</span>HS<span class="clr-accent">/&gt;</span>
+      </a>
+      <ul class="nav__links" id="navLinks">
+        <li><a href="#home"       class="nav__link active">Home</a></li>
+        <li><a href="#about"      class="nav__link">About</a></li>
+        <li><a href="#skills"     class="nav__link">Skills</a></li>
+        <li><a href="#experience" class="nav__link">Experience</a></li>
+        <li><a href="#projects"   class="nav__link">Projects</a></li>
+        <li><a href="#contact"    class="nav__link">Contact</a></li>
+      </ul>
+      <button class="nav__burger" id="navBurger" aria-label="Toggle navigation menu">
+        <span class="burger-bar"></span>
+        <span class="burger-bar"></span>
+        <span class="burger-bar"></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- ========== HERO ========== -->
+  <section class="hero" id="home">
+    <canvas id="heroCanvas" class="hero__canvas"></canvas>
+    <div class="hero__glow hero__glow--left"></div>
+    <div class="hero__glow hero__glow--right"></div>
+
+    <div class="container hero__content">
+      <div class="hero__badge reveal">
+        <span class="hero__badge-dot"></span>
+        Available for opportunities
+      </div>
+
+      <h1 class="hero__name reveal">
+        <span class="hero__greeting">Hello, I'm</span>
+        Hiren Suthar
+      </h1>
+
+      <h2 class="hero__role reveal">
+        Full Stack <span class="hero__role-gradient">Developer</span>
+      </h2>
+
+      <p class="hero__headline reveal">
+        Building Modern, Scalable &amp; High-Performance Web Applications.
+      </p>
+
+      <p class="hero__intro reveal">
+        I am a passionate Full Stack Developer focused on building modern, scalable,
+        and user-friendly web applications using modern technologies.
+      </p>
+
+      <div class="hero__cta reveal">
+        <a href="#projects" class="btn btn--primary">
+          View My Work
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17L17 7"/><path d="M7 7h10v10"/></svg>
+        </a>
+        <a href="#contact" class="btn btn--ghost">Contact Me</a>
+      </div>
+
+      <div class="hero__stack reveal">
+        <span class="hero__stack-label">Tech Stack</span>
+        <div class="hero__stack-icons">
+          <span class="stack-icon" title="Angular"><i class="devicon-angularjs-plain colored"></i></span>
+          <span class="stack-icon" title="React"><i class="devicon-react-original colored"></i></span>
+          <span class="stack-icon" title="Node.js"><i class="devicon-nodejs-plain colored"></i></span>
+          <span class="stack-icon" title="NestJS"><i class="devicon-nestjs-plain colored"></i></span>
+          <span class="stack-icon" title="TypeScript"><i class="devicon-typescript-plain colored"></i></span>
+          <span class="stack-icon" title="PostgreSQL"><i class="devicon-postgresql-plain colored"></i></span>
+        </div>
+      </div>
+    </div>
+
+    <div class="hero__scroll">
+      <div class="hero__scroll-line"></div>
+      <span class="hero__scroll-text">Scroll</span>
+    </div>
+  </section>
+
+  <!-- ========== ABOUT ========== -->
+  <section class="about section" id="about">
+    <div class="container">
+      <div class="section-header reveal">
+        <span class="section-eyebrow">Who I Am</span>
+        <h2 class="section-title">About Me</h2>
+      </div>
+
+      <div class="about__grid">
+        <div class="about__body reveal">
+          <p>I am a Full Stack Developer with experience building modern web applications and business management systems.</p>
+          <p>I enjoy working on both frontend and backend development, creating scalable applications, clean user interfaces, and efficient APIs.</p>
+          <p>I have experience working with modern technologies including Angular, React, Node.js, NestJS, .NET APIs, and relational databases.</p>
+
+          <div class="about__stats">
+            <div class="about__stat">
+              <span class="about__stat-val">1+</span>
+              <span class="about__stat-lbl">Year Experience</span>
+            </div>
+            <div class="about__stat">
+              <span class="about__stat-val">10+</span>
+              <span class="about__stat-lbl">Technologies</span>
+            </div>
+            <div class="about__stat">
+              <span class="about__stat-val">3+</span>
+              <span class="about__stat-lbl">Projects Built</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="about__cards reveal">
+          <div class="highlight-card">
+            <div class="highlight-card__icon">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+            </div>
+            <h3>Full Stack Development</h3>
+            <p>End-to-end application development from concept to deployment</p>
+          </div>
+
+          <div class="highlight-card">
+            <div class="highlight-card__icon">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+            </div>
+            <h3>Frontend Development</h3>
+            <p>Modern, responsive UIs with Angular and React</p>
+          </div>
+
+          <div class="highlight-card">
+            <div class="highlight-card__icon">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="2" width="20" height="8" rx="2"/><rect x="2" y="14" width="20" height="8" rx="2"/><line x1="6" y1="6" x2="6.01" y2="6"/><line x1="6" y1="18" x2="6.01" y2="18"/></svg>
+            </div>
+            <h3>Backend Development</h3>
+            <p>Scalable APIs with Node.js, NestJS, and .NET</p>
+          </div>
+
+          <div class="highlight-card">
+            <div class="highlight-card__icon">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/></svg>
+            </div>
+            <h3>Database Design</h3>
+            <p>Efficient schemas with PostgreSQL, MySQL, SQL Server</p>
+          </div>
+
+          <div class="highlight-card">
+            <div class="highlight-card__icon">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 20V10"/><path d="M12 20V4"/><path d="M6 20v-6"/></svg>
+            </div>
+            <h3>API Development</h3>
+            <p>RESTful API design, development, and integration</p>
+          </div>
+
+          <div class="highlight-card">
+            <div class="highlight-card__icon">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="9" y1="18" x2="15" y2="18"/><line x1="10" y1="22" x2="14" y2="22"/><path d="M15.09 14c.18-.98.65-1.74 1.41-2.5A4.65 4.65 0 0 0 18 8 6 6 0 0 0 6 8c0 1 .23 2.23 1.5 3.5A4.61 4.61 0 0 1 8.91 14"/></svg>
+            </div>
+            <h3>Problem Solving</h3>
+            <p>Analytical approach to complex technical challenges</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== SKILLS ========== -->
+  <section class="skills section" id="skills">
+    <div class="container">
+      <div class="section-header reveal">
+        <span class="section-eyebrow">What I Use</span>
+        <h2 class="section-title">Skills &amp; Technologies</h2>
+      </div>
+
+      <div class="skills__grid">
+
+        <div class="skill-group reveal">
+          <h3 class="skill-group__title">Frontend</h3>
+          <div class="skill-list">
+            <div class="skill-pill"><i class="devicon-angularjs-plain colored"></i><span>Angular</span></div>
+            <div class="skill-pill"><i class="devicon-react-original colored"></i><span>React</span></div>
+            <div class="skill-pill"><i class="devicon-typescript-plain colored"></i><span>TypeScript</span></div>
+            <div class="skill-pill"><i class="devicon-javascript-plain colored"></i><span>JavaScript</span></div>
+            <div class="skill-pill"><i class="devicon-html5-plain colored"></i><span>HTML5</span></div>
+            <div class="skill-pill"><i class="devicon-css3-plain colored"></i><span>CSS3</span></div>
+          </div>
+        </div>
+
+        <div class="skill-group reveal">
+          <h3 class="skill-group__title">Backend</h3>
+          <div class="skill-list">
+            <div class="skill-pill"><i class="devicon-nodejs-plain colored"></i><span>Node.js</span></div>
+            <div class="skill-pill"><i class="devicon-nestjs-plain colored"></i><span>NestJS</span></div>
+            <div class="skill-pill">
+              <svg width="22" height="22" viewBox="0 0 22 22" aria-hidden="true">
+                <rect width="22" height="22" rx="4" fill="#512BD4" fill-opacity="0.25"/>
+                <text x="11" y="15" text-anchor="middle" fill="#818cf8" font-family="Inter,sans-serif" font-weight="700" font-size="6.5">.NET</text>
+              </svg>
+              <span>.NET APIs</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="skill-group reveal">
+          <h3 class="skill-group__title">Databases</h3>
+          <div class="skill-list">
+            <div class="skill-pill"><i class="devicon-postgresql-plain colored"></i><span>PostgreSQL</span></div>
+            <div class="skill-pill"><i class="devicon-mysql-plain colored"></i><span>MySQL</span></div>
+            <div class="skill-pill"><i class="devicon-microsoftsqlserver-plain colored"></i><span>SQL Server</span></div>
+          </div>
+        </div>
+
+        <div class="skill-group reveal">
+          <h3 class="skill-group__title">Tools &amp; Technologies</h3>
+          <div class="skill-list">
+            <div class="skill-pill"><i class="devicon-git-plain colored"></i><span>Git</span></div>
+            <div class="skill-pill"><i class="devicon-github-original"></i><span>GitHub</span></div>
+            <div class="skill-pill">
+              <svg width="22" height="22" viewBox="0 0 22 22" aria-hidden="true">
+                <rect width="22" height="22" rx="4" fill="#06b6d4" fill-opacity="0.12"/>
+                <text x="11" y="15" text-anchor="middle" fill="#22d3ee" font-family="Inter,sans-serif" font-weight="700" font-size="6">REST</text>
+              </svg>
+              <span>REST APIs</span>
+            </div>
+            <div class="skill-pill">
+              <svg width="22" height="22" viewBox="0 0 22 22" aria-hidden="true">
+                <rect width="22" height="22" rx="4" fill="#e0234e" fill-opacity="0.12"/>
+                <text x="11" y="15" text-anchor="middle" fill="#fb7185" font-family="Inter,sans-serif" font-weight="700" font-size="5.5">ORM</text>
+              </svg>
+              <span>TypeORM</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== EXPERIENCE ========== -->
+  <section class="experience section" id="experience">
+    <div class="container">
+      <div class="section-header reveal">
+        <span class="section-eyebrow">My Journey</span>
+        <h2 class="section-title">Professional Experience</h2>
+      </div>
+
+      <div class="timeline">
+        <div class="timeline__item reveal">
+          <div class="timeline__left">
+            <div class="timeline__dot"></div>
+            <div class="timeline__line"></div>
+          </div>
+          <div class="timeline__card">
+            <div class="timeline__head">
+              <div class="timeline__meta">
+                <h3 class="timeline__role">Jr. Software Developer</h3>
+                <p class="timeline__company">Kwiqwork Tech Studio LLP</p>
+              </div>
+              <div class="timeline__period">
+                <span class="timeline__status">Current</span>
+                <span class="timeline__date">2024 — Present</span>
+              </div>
+            </div>
+            <ul class="timeline__list">
+              <li>Developing modern web applications with Angular and React</li>
+              <li>Building responsive frontend interfaces with clean UI/UX</li>
+              <li>Developing RESTful APIs with NestJS and .NET</li>
+              <li>Working with databases including PostgreSQL and SQL Server</li>
+              <li>Implementing new modules and features for business management systems</li>
+              <li>Fixing bugs and improving application performance</li>
+              <li>Collaborating with development teams in an agile environment</li>
+            </ul>
+            <div class="timeline__tags">
+              <span class="tag">Angular</span>
+              <span class="tag">React</span>
+              <span class="tag">NestJS</span>
+              <span class="tag">Node.js</span>
+              <span class="tag">PostgreSQL</span>
+              <span class="tag">TypeScript</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== PROJECTS ========== -->
+  <section class="projects section" id="projects">
+    <div class="container">
+      <div class="section-header reveal">
+        <span class="section-eyebrow">What I've Built</span>
+        <h2 class="section-title">Selected Projects</h2>
+      </div>
+
+      <div class="projects__grid">
+
+        <!-- Project 1 -->
+        <article class="project-card reveal">
+          <div class="project-card__visual project-card__visual--indigo">
+            <div class="project-card__pattern"></div>
+            <div class="project-card__icons" aria-hidden="true">
+              <span>&#127979;</span>
+              <span>&#127891;</span>
+              <span>&#128202;</span>
+            </div>
+            <span class="project-card__num">01</span>
+          </div>
+          <div class="project-card__body">
+            <h3 class="project-card__title">School Management System</h3>
+            <p class="project-card__desc">A comprehensive web application designed to manage school operations including student management, attendance tracking, academics, examination management, HRMS, notifications, and insightful dashboards.</p>
+            <div class="project-card__features">
+              <span class="feature">Student Management</span>
+              <span class="feature">Attendance</span>
+              <span class="feature">Academics</span>
+              <span class="feature">Examination</span>
+              <span class="feature">HRMS</span>
+              <span class="feature">Dashboards</span>
+            </div>
+            <div class="project-card__footer">
+              <div class="project-card__tech">
+                <span class="tech-badge">Angular</span>
+                <span class="tech-badge">NestJS</span>
+                <span class="tech-badge">PostgreSQL</span>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <!-- Project 2 -->
+        <article class="project-card reveal">
+          <div class="project-card__visual project-card__visual--cyan">
+            <div class="project-card__pattern"></div>
+            <div class="project-card__icons" aria-hidden="true">
+              <span>&#128188;</span>
+              <span>&#128200;</span>
+              <span>&#128101;</span>
+            </div>
+            <span class="project-card__num">02</span>
+          </div>
+          <div class="project-card__body">
+            <h3 class="project-card__title">CRM System</h3>
+            <p class="project-card__desc">A business management platform designed to manage leads, employees, customers, and business workflows with role-based access control, business expos, notes, and comprehensive activity tracking.</p>
+            <div class="project-card__features">
+              <span class="feature">Lead Management</span>
+              <span class="feature">Employee Mgmt</span>
+              <span class="feature">Role-Based Access</span>
+              <span class="feature">Business Expos</span>
+              <span class="feature">Activity Tracking</span>
+            </div>
+            <div class="project-card__footer">
+              <div class="project-card__tech">
+                <span class="tech-badge">Angular</span>
+                <span class="tech-badge">NestJS</span>
+                <span class="tech-badge">PostgreSQL</span>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <!-- Project 3 -->
+        <article class="project-card reveal">
+          <div class="project-card__visual project-card__visual--amber">
+            <div class="project-card__pattern"></div>
+            <div class="project-card__icons" aria-hidden="true">
+              <span>&#9881;&#65039;</span>
+              <span>&#128203;</span>
+              <span>&#128640;</span>
+            </div>
+            <span class="project-card__num">03</span>
+          </div>
+          <div class="project-card__body">
+            <h3 class="project-card__title">Business Management Platform</h3>
+            <p class="project-card__desc">A scalable platform for managing business operations and workflows, built with modern web technologies to handle complex business processes and improve operational efficiency.</p>
+            <div class="project-card__features">
+              <span class="feature">Operations Mgmt</span>
+              <span class="feature">Workflow Automation</span>
+              <span class="feature">Analytics</span>
+              <span class="feature">Reporting</span>
+            </div>
+            <div class="project-card__footer">
+              <div class="project-card__tech">
+                <span class="tech-badge">React</span>
+                <span class="tech-badge">Node.js</span>
+                <span class="tech-badge">SQL Server</span>
+              </div>
+            </div>
+          </div>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== CONTACT ========== -->
+  <section class="contact section" id="contact">
+    <div class="container">
+      <div class="section-header reveal">
+        <span class="section-eyebrow">Get In Touch</span>
+        <h2 class="section-title">Let's Work Together</h2>
+        <p class="section-subtitle">Have a project in mind or want to work together? Feel free to get in touch.</p>
+      </div>
+
+      <form class="contact-form reveal" id="contactForm" novalidate>
+        <div class="form-row">
+          <div class="form-field">
+            <label for="contactName">Name</label>
+            <input type="text" id="contactName" name="name" placeholder="Your name" required autocomplete="name">
+          </div>
+          <div class="form-field">
+            <label for="contactEmail">Email</label>
+            <input type="email" id="contactEmail" name="email" placeholder="your.email@example.com" required autocomplete="email">
+          </div>
+        </div>
+        <div class="form-field">
+          <label for="contactMessage">Message</label>
+          <textarea id="contactMessage" name="message" rows="6" placeholder="Tell me about your project or idea..." required></textarea>
+        </div>
+        <button type="submit" class="btn btn--primary btn--full" id="submitBtn">
+          <span class="submit-text">Send Message</span>
+          <svg class="submit-icon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+        </button>
+      </form>
+    </div>
+  </section>
+
+  <!-- ========== FOOTER ========== -->
+  <footer class="footer">
+    <div class="container footer__inner">
+      <a href="#home" class="footer__logo">
+        <span class="clr-accent">&lt;</span>HS<span class="clr-accent">/&gt;</span>
+      </a>
+      <p class="footer__copy">Designed &amp; Built by Hiren Suthar</p>
+      <p class="footer__year">&copy; <span id="footerYear"></span> Hiren Suthar. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+</body>
+</html>
