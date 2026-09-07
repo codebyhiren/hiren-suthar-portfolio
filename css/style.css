@@ -1254,3 +1254,106 @@ section[id] {
     padding-bottom: 0 !important;
   }
 }
+
+/* ============================================================
+   CONTACT FORM — VALIDATION & STATES
+   ============================================================ */
+
+/* Inline field error text */
+.form-error {
+  display: block;
+  font-size: 0.78rem;
+  color: var(--accent);
+  margin-top: 0.35rem;
+  min-height: 1.1em;
+  opacity: 0;
+  transform: translateY(-4px);
+  transition: opacity 0.2s ease, transform 0.2s ease;
+  pointer-events: none;
+}
+.form-error:not(:empty) {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Error state on the field wrapper */
+.form-field--error input,
+.form-field--error textarea {
+  border-color: var(--accent) !important;
+  box-shadow: 0 0 0 3px rgba(225, 29, 72, 0.15);
+}
+
+/* Network / server error banner */
+.form-net-error {
+  display: none;
+  padding: 0.75rem 1rem;
+  border-radius: 8px;
+  border: 1px solid rgba(225, 29, 72, 0.4);
+  background: rgba(225, 29, 72, 0.08);
+  color: #fb7185;
+  font-size: 0.875rem;
+  margin-bottom: 0.5rem;
+}
+.form-net-error.visible { display: block; }
+
+/* Loading spinner on submit button */
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+.btn-spinner {
+  display: none;
+  width: 16px;
+  height: 16px;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-top-color: #fff;
+  border-radius: 50%;
+  animation: spin 0.7s linear infinite;
+  flex-shrink: 0;
+}
+.btn--primary.loading .btn-spinner  { display: block; }
+.btn--primary.loading .submit-icon  { display: none; }
+.btn--primary.loading .submit-text  { opacity: 0.7; }
+
+/* Success state */
+@keyframes fadeScaleIn {
+  from { opacity: 0; transform: scale(0.96) translateY(8px); }
+  to   { opacity: 1; transform: scale(1)    translateY(0);   }
+}
+.form-success {
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 3rem 1.5rem;
+  gap: 1rem;
+}
+.form-success.visible {
+  display: flex;
+  animation: fadeScaleIn 0.4s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+.form-success__icon {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background: rgba(225, 29, 72, 0.12);
+  border: 1px solid rgba(225, 29, 72, 0.35);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--accent);
+}
+.form-success__title {
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: var(--txt-0);
+}
+.form-success__desc {
+  font-size: 0.95rem;
+  color: var(--txt-1);
+  max-width: 340px;
+  line-height: 1.6;
+}
+.form-success__reset {
+  margin-top: 0.5rem;
+  font-size: 0.85rem;
+}

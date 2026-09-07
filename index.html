@@ -513,28 +513,52 @@
       <p class="section-subtitle">Have a project in mind or want to work together? Feel free to get in touch.</p>
     </div>
 
-    <form class="contact-form reveal" id="contactForm" novalidate>
+    <form class="contact-form reveal" id="contactForm" novalidate autocomplete="off">
+      <!-- Hidden Formspree honeypot (spam protection) -->
+      <input type="text" name="_gotcha" style="display:none" tabindex="-1" aria-hidden="true">
+      <!-- Hidden subject line for email -->
+      <input type="hidden" name="_subject" value="New Portfolio Contact from Hiren's Site">
+
       <div class="form-row">
-        <div class="form-field">
+        <div class="form-field" id="fieldName">
           <label for="contactName">Name</label>
-          <input type="text" id="contactName" name="name" placeholder="Your name" required>
+          <input type="text" id="contactName" name="name" placeholder="Your name" required autocomplete="name">
+          <span class="form-error" id="nameError" role="alert" aria-live="polite"></span>
         </div>
-        <div class="form-field">
+        <div class="form-field" id="fieldEmail">
           <label for="contactEmail">Email</label>
-          <input type="email" id="contactEmail" name="email" placeholder="your@email.com" required>
+          <input type="email" id="contactEmail" name="email" placeholder="your@email.com" required autocomplete="email">
+          <span class="form-error" id="emailError" role="alert" aria-live="polite"></span>
         </div>
       </div>
-      <div class="form-field">
+
+      <div class="form-field" id="fieldMessage">
         <label for="contactMessage">Message</label>
         <textarea id="contactMessage" name="message" rows="6" placeholder="Tell me about your project or idea..." required></textarea>
+        <span class="form-error" id="messageError" role="alert" aria-live="polite"></span>
       </div>
+
+      <!-- Network / server error banner -->
+      <div class="form-net-error" id="formNetError" role="alert" aria-live="assertive"></div>
+
       <button type="submit" class="btn btn--primary btn--full" id="submitBtn">
         <span class="submit-text">Send Message</span>
-        <span class="submit-icon">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+        <span class="submit-icon" id="submitIcon" aria-hidden="true">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
         </span>
+        <span class="btn-spinner" aria-hidden="true"></span>
       </button>
     </form>
+
+    <!-- Success state (shown after successful submission) -->
+    <div class="form-success" id="formSuccess" aria-live="polite">
+      <div class="form-success__icon">
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
+      </div>
+      <h3 class="form-success__title">Message Sent!</h3>
+      <p class="form-success__desc">Thanks for reaching out. I'll get back to you as soon as possible.</p>
+      <button class="btn btn--ghost form-success__reset" id="resetFormBtn">Send Another Message</button>
+    </div>
 
   </div>
 </section>

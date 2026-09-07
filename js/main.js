@@ -221,45 +221,140 @@
 
 /* ---------- CONTACT FORM ---------- */
 (function initForm() {
-  const form  = document.getElementById('contactForm');
-  const btn   = document.getElementById('submitBtn');
+  const form       = document.getElementById('contactForm');
+  const successEl  = document.getElementById('formSuccess');
+  const netErrEl   = document.getElementById('formNetError');
+  const btn        = document.getElementById('submitBtn');
+  const resetBtn   = document.getElementById('resetFormBtn');
   if (!form || !btn) return;
 
-  const textEl = btn.querySelector('.submit-text');
-  const iconEl = btn.querySelector('.submit-icon');
+  const ENDPOINT = 'https://formspree.io/f/xppzyqvo';
 
-  form.addEventListener('submit', e => {
-    e.preventDefault();
+  const fields = {
+    name:    { el: document.getElementById('contactName'),    err: document.getElementById('nameError'),    field: document.getElementById('fieldName')    },
+    email:   { el: document.getElementById('contactEmail'),   err: document.getElementById('emailError'),   field: document.getElementById('fieldEmail')   },
+    message: { el: document.getElementById('contactMessage'), err: document.getElementById('messageError'), field: document.getElementById('fieldMessage') },
+  };
 
-    const inputs = form.querySelectorAll('input[required], textarea[required]');
-    let valid = true;
-    inputs.forEach(inp => {
-      if (!inp.value.trim()) { inp.style.borderColor = '#ef4444'; valid = false; }
-      else inp.style.borderColor = '';
+  const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
+
+  function validateName(val) {
+    if (!val.trim()) return 'Name is required.';
+    if (val.trim().length < 2) return 'Name must be at least 2 characters.';
+    return '';
+  }
+  function validateEmail(val) {
+    if (!val.trim()) return 'Email is required.';
+    if (!EMAIL_RE.test(val.trim())) return 'Please enter a valid email address.';
+    return '';
+  }
+  function validateMessage(val) {
+    if (!val.trim()) return 'Message is required.';
+    if (val.trim().length < 10) return 'Message must be at least 10 characters.';
+    return '';
+  }
+
+  const validators = { name: validateName, email: validateEmail, message: validateMessage };
+
+  function showError(key, msg) {
+    const f = fields[key];
+    f.err.textContent = msg;
+    f.field.classList.toggle('form-field--error', !!msg);
+  }
+
+  function validateField(key) {
+    const f   = fields[key];
+    const msg = validators[key](f.el.value);
+    showError(key, msg);
+    return !msg;
+  }
+
+  // Blur validation
+  Object.keys(fields).forEach(key => {
+    fields[key].el.addEventListener('blur', () => validateField(key));
+    fields[key].el.addEventListener('input', () => {
+      // clear error once user starts correcting
+      if (fields[key].field.classList.contains('form-field--error')) {
+        validateField(key);
+      }
     });
-    if (!valid) return;
-
-    btn.disabled = true;
-    textEl.textContent = 'Sending…';
-
-    setTimeout(() => {
-      btn.classList.add('sent');
-      textEl.textContent = 'Message Sent!';
-      iconEl.innerHTML = `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>`;
-
-      setTimeout(() => {
-        btn.disabled = false;
-        btn.classList.remove('sent');
-        textEl.textContent = 'Send Message';
-        iconEl.innerHTML = `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>`;
-        form.reset();
-      }, 3000);
-    }, 1000);
   });
 
-  form.querySelectorAll('input, textarea').forEach(inp => {
-    inp.addEventListener('input', () => { inp.style.borderColor = ''; });
+  function setLoading(on) {
+    btn.classList.toggle('loading', on);
+    btn.disabled = on;
+  }
+
+  function hideNetError() {
+    if (netErrEl) { netErrEl.textContent = ''; netErrEl.classList.remove('visible'); }
+  }
+
+  let submitting = false;
+
+  form.addEventListener('submit', async e => {
+    e.preventDefault();
+    if (submitting) return;
+
+    hideNetError();
+
+    // Validate all fields
+    const validName    = validateField('name');
+    const validEmail   = validateField('email');
+    const validMessage = validateField('message');
+    if (!validName || !validEmail || !validMessage) {
+      // Focus first error
+      for (const key of ['name', 'email', 'message']) {
+        if (fields[key].field.classList.contains('form-field--error')) {
+          fields[key].el.focus();
+          break;
+        }
+      }
+      return;
+    }
+
+    submitting = true;
+    setLoading(true);
+
+    try {
+      const data = new FormData(form);
+      const res  = await fetch(ENDPOINT, {
+        method:  'POST',
+        body:    data,
+        headers: { Accept: 'application/json' },
+      });
+
+      if (res.ok) {
+        // Show success state
+        form.style.display   = 'none';
+        if (successEl) successEl.classList.add('visible');
+      } else {
+        const json = await res.json().catch(() => ({}));
+        const msg  = (json.errors && json.errors.map(x => x.message).join(', ')) ||
+                     `Server error (${res.status}). Please try again.`;
+        if (netErrEl) { netErrEl.textContent = msg; netErrEl.classList.add('visible'); }
+      }
+    } catch {
+      if (netErrEl) {
+        netErrEl.textContent = 'Network error — please check your connection and try again.';
+        netErrEl.classList.add('visible');
+      }
+    } finally {
+      submitting = false;
+      setLoading(false);
+    }
   });
+
+  // "Send Another Message" resets form and shows it again
+  if (resetBtn) {
+    resetBtn.addEventListener('click', () => {
+      form.reset();
+      Object.keys(fields).forEach(key => showError(key, ''));
+      hideNetError();
+      form.style.display   = '';
+      if (successEl) successEl.classList.remove('visible');
+      fields.name.el.focus();
+    });
+  }
 })();
 
 /* ---------- HERO VISUAL PARALLAX ---------- */
