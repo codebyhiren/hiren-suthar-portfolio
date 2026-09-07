@@ -7,8 +7,8 @@
   const canvas = document.getElementById('heroCanvas');
   if (!canvas) return;
 
-  const ctx = canvas.getContext('2d');
-  const COLOR = '99, 102, 241'; // indigo
+  const ctx   = canvas.getContext('2d');
+  const COLOR = '225, 29, 72'; // red accent
   let particles = [];
   let raf;
 
@@ -22,10 +22,10 @@
     init() {
       this.x  = Math.random() * canvas.width;
       this.y  = Math.random() * canvas.height;
-      this.vx = (Math.random() - 0.5) * 0.35;
-      this.vy = (Math.random() - 0.5) * 0.35;
-      this.r  = Math.random() * 1.6 + 0.4;
-      this.a  = Math.random() * 0.35 + 0.08;
+      this.vx = (Math.random() - 0.5) * 0.3;
+      this.vy = (Math.random() - 0.5) * 0.3;
+      this.r  = Math.random() * 1.4 + 0.4;
+      this.a  = Math.random() * 0.28 + 0.06;
     }
     update() {
       this.x += this.vx;
@@ -44,19 +44,19 @@
 
   function buildParticles() {
     particles = [];
-    const count = Math.min(90, Math.floor((canvas.width * canvas.height) / 16000));
+    const count = Math.min(80, Math.floor((canvas.width * canvas.height) / 18000));
     for (let i = 0; i < count; i++) particles.push(new Particle());
   }
 
   function drawLines() {
-    const MAX_DIST = 130;
+    const MAX_DIST = 120;
     for (let i = 0; i < particles.length; i++) {
       for (let j = i + 1; j < particles.length; j++) {
         const dx = particles[i].x - particles[j].x;
         const dy = particles[i].y - particles[j].y;
         const d  = Math.sqrt(dx * dx + dy * dy);
         if (d < MAX_DIST) {
-          const alpha = (1 - d / MAX_DIST) * 0.1;
+          const alpha = (1 - d / MAX_DIST) * 0.08;
           ctx.beginPath();
           ctx.moveTo(particles[i].x, particles[i].y);
           ctx.lineTo(particles[j].x, particles[j].y);
@@ -75,7 +75,7 @@
     raf = requestAnimationFrame(frame);
   }
 
-  // Pause when hero is off-screen to save CPU
+  // Pause when hero is off-screen
   const heroEl = document.getElementById('home');
   const visObs = new IntersectionObserver(entries => {
     entries.forEach(e => {
@@ -107,22 +107,19 @@
   const links     = document.getElementById('navLinks');
   const linkItems = document.querySelectorAll('.nav__link');
 
-  // Scroll class
   function onScroll() {
     nav.classList.toggle('scrolled', window.scrollY > 40);
     highlightActiveLink();
   }
   window.addEventListener('scroll', onScroll, { passive: true });
-  onScroll(); // run once on load
+  onScroll();
 
-  // Mobile menu
   burger.addEventListener('click', () => {
     const open = links.classList.toggle('open');
     burger.classList.toggle('open', open);
     burger.setAttribute('aria-expanded', open);
   });
 
-  // Close menu on link click
   linkItems.forEach(link => {
     link.addEventListener('click', () => {
       links.classList.remove('open');
@@ -131,7 +128,6 @@
     });
   });
 
-  // Highlight active section link
   function highlightActiveLink() {
     const sections = document.querySelectorAll('section[id]');
     const scrollY  = window.scrollY + 100;
@@ -174,11 +170,10 @@
     entries.forEach(entry => {
       if (!entry.isIntersecting) return;
 
-      // Stagger siblings inside the same parent
       const parent   = entry.target.parentElement;
       const siblings = parent ? [...parent.querySelectorAll('.reveal:not(.visible)')] : [];
       const idx      = siblings.indexOf(entry.target);
-      const delay    = idx > 0 ? idx * 75 : 0;
+      const delay    = idx > 0 ? idx * 70 : 0;
 
       setTimeout(() => {
         entry.target.classList.add('visible');
@@ -194,10 +189,40 @@
   els.forEach(el => observer.observe(el));
 })();
 
+/* ---------- STAT COUNTERS (About section) ---------- */
+(function initCounters() {
+  const counters = document.querySelectorAll('.about__stat-val[data-count]');
+  if (!counters.length) return;
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (!entry.isIntersecting) return;
+      const el     = entry.target;
+      const target = parseInt(el.dataset.count, 10);
+      const dur    = 1400;
+      const start  = performance.now();
+
+      function tick(now) {
+        const elapsed  = now - start;
+        const progress = Math.min(elapsed / dur, 1);
+        const eased    = 1 - Math.pow(1 - progress, 3);
+        el.textContent = Math.floor(eased * target);
+        if (progress < 1) requestAnimationFrame(tick);
+        else el.textContent = target;
+      }
+
+      requestAnimationFrame(tick);
+      observer.unobserve(el);
+    });
+  }, { threshold: 0.6 });
+
+  counters.forEach(el => observer.observe(el));
+})();
+
 /* ---------- CONTACT FORM ---------- */
 (function initForm() {
-  const form   = document.getElementById('contactForm');
-  const btn    = document.getElementById('submitBtn');
+  const form  = document.getElementById('contactForm');
+  const btn   = document.getElementById('submitBtn');
   if (!form || !btn) return;
 
   const textEl = btn.querySelector('.submit-text');
@@ -206,7 +231,6 @@
   form.addEventListener('submit', e => {
     e.preventDefault();
 
-    // Basic validation feedback
     const inputs = form.querySelectorAll('input[required], textarea[required]');
     let valid = true;
     inputs.forEach(inp => {
@@ -215,26 +239,24 @@
     });
     if (!valid) return;
 
-    // Simulate send
     btn.disabled = true;
     textEl.textContent = 'Sending…';
 
     setTimeout(() => {
       btn.classList.add('sent');
       textEl.textContent = 'Message Sent!';
-      iconEl.innerHTML = `<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>`;
+      iconEl.innerHTML = `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>`;
 
       setTimeout(() => {
         btn.disabled = false;
         btn.classList.remove('sent');
         textEl.textContent = 'Send Message';
-        iconEl.innerHTML = `<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>`;
+        iconEl.innerHTML = `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>`;
         form.reset();
       }, 3000);
     }, 1000);
   });
 
-  // Clear error border on input
   form.querySelectorAll('input, textarea').forEach(inp => {
     inp.addEventListener('input', () => { inp.style.borderColor = ''; });
   });
@@ -246,18 +268,15 @@
   const hero    = document.getElementById('home');
   if (!visual || !hero) return;
 
-  const badges  = visual.querySelectorAll('.hv-badge');
-  const window_ = visual.querySelector('.hv-window');
+  const win_    = visual.querySelector('.hv-window');
   let active    = true;
 
-  // Pause when hero is off-screen
   const obs = new IntersectionObserver(entries => {
     active = entries[0].isIntersecting;
   }, { threshold: 0.01 });
   obs.observe(hero);
 
-  let cx = 0, cy = 0; // current smoothed values
-  let tx = 0, ty = 0; // target
+  let cx = 0, cy = 0, tx = 0, ty = 0;
 
   document.addEventListener('mousemove', e => {
     if (!active) return;
@@ -271,15 +290,12 @@
       cx += (tx - cx) * 0.055;
       cy += (ty - cy) * 0.055;
 
-      // Whole visual drifts gently with cursor
       visual.style.transform = `translate(${cx * 7}px, ${cy * 5}px)`;
 
-      // Window shifts slightly in the opposite direction for depth
-      if (window_) {
-        window_.style.transform =
+      if (win_) {
+        win_.style.transform =
           `translate(calc(-50% + ${cx * -3}px), calc(-50% + ${cy * -2}px))`;
       }
-      // Note: badges keep their CSS float animations untouched
     }
     requestAnimationFrame(tick);
   }

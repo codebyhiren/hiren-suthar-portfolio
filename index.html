@@ -3,533 +3,553 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Hiren Suthar — Full Stack Developer building modern, scalable, and high-performance web applications.">
+  <meta name="description" content="Hiren Suthar — Full Stack Developer. Building modern, scalable, high-performance web applications.">
   <title>Hiren Suthar — Full Stack Developer</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@v2.16.0/devicon.min.css">
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
 
-  <!-- ========== NAVIGATION ========== -->
-  <nav class="nav" id="nav">
-    <div class="container nav__inner">
-      <a href="#home" class="nav__logo">
-        <span class="clr-accent">&lt;</span>HS<span class="clr-accent">/&gt;</span>
-      </a>
-      <ul class="nav__links" id="navLinks">
-        <li><a href="#home"       class="nav__link active">Home</a></li>
-        <li><a href="#about"      class="nav__link">About</a></li>
-        <li><a href="#skills"     class="nav__link">Skills</a></li>
-        <li><a href="#experience" class="nav__link">Experience</a></li>
-        <li><a href="#projects"   class="nav__link">Projects</a></li>
-        <li><a href="#contact"    class="nav__link">Contact</a></li>
-      </ul>
-      <button class="nav__burger" id="navBurger" aria-label="Toggle navigation menu">
-        <span class="burger-bar"></span>
-        <span class="burger-bar"></span>
-        <span class="burger-bar"></span>
-      </button>
+<!-- Grain overlay -->
+<div class="grain" aria-hidden="true"></div>
+
+<!-- ============================================================
+     NAVIGATION
+     ============================================================ -->
+<nav class="nav" id="nav">
+  <div class="container nav__inner">
+    <a href="#home" class="nav__logo">&lt;HS/&gt;</a>
+    <ul class="nav__links" id="navLinks">
+      <li><a href="#home"       class="nav__link">Home</a></li>
+      <li><a href="#about"      class="nav__link">About</a></li>
+      <li><a href="#skills"     class="nav__link">Skills</a></li>
+      <li><a href="#experience" class="nav__link">Experience</a></li>
+      <li><a href="#projects"   class="nav__link">Projects</a></li>
+      <li><a href="#contact"    class="nav__link">Contact</a></li>
+    </ul>
+    <button class="nav__burger" id="navBurger" aria-label="Toggle navigation menu" aria-expanded="false">
+      <span class="burger-bar"></span>
+      <span class="burger-bar"></span>
+      <span class="burger-bar"></span>
+    </button>
+  </div>
+</nav>
+
+<!-- ============================================================
+     HERO
+     ============================================================ -->
+<section class="hero" id="home">
+  <canvas id="heroCanvas" class="hero__canvas" aria-hidden="true"></canvas>
+  <div class="hero__glow hero__glow--1" aria-hidden="true"></div>
+  <div class="hero__glow hero__glow--2" aria-hidden="true"></div>
+  <div class="hero__grid"              aria-hidden="true"></div>
+
+  <div class="container hero__layout">
+
+    <!-- LEFT: text content -->
+    <div class="hero__left">
+      <div class="hero__badge">
+        <span class="hero__badge-dot"></span>
+        Available for opportunities
+      </div>
+
+      <h1 class="hero__name">
+        <span class="hero__name-line">HIREN</span>
+        <span class="hero__name-line hero__name-line--stroke">SUTHAR</span>
+      </h1>
+
+      <div class="hero__role-wrap">
+        <span class="hero__role-line"></span>
+        <span class="hero__role">Full Stack Developer</span>
+        <span class="hero__role-line"></span>
+      </div>
+
+      <p class="hero__desc">
+        Building modern, scalable, and high-performance web applications.
+      </p>
+
+      <div class="hero__cta">
+        <a href="#projects" class="btn btn--primary">
+          View My Work
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+        <a href="#contact" class="btn btn--ghost">Contact Me</a>
+      </div>
     </div>
-  </nav>
 
-  <!-- ========== HERO ========== -->
-  <section class="hero" id="home">
-    <canvas id="heroCanvas" class="hero__canvas"></canvas>
-    <div class="hero__glow hero__glow--left"></div>
-    <div class="hero__glow hero__glow--right"></div>
+    <!-- RIGHT: developer visual -->
+    <div class="hero__right reveal">
+      <div class="hero__visual" id="heroVisual">
+        <div class="hv-grid"></div>
+        <div class="hv-orb"></div>
 
-    <div class="container hero__layout">
-
-      <!-- LEFT: introduction -->
-      <div class="hero__left">
-        <div class="hero__badge reveal">
-          <span class="hero__badge-dot"></span>
-          Available for opportunities
+        <!-- Code window -->
+        <div class="hv-window">
+          <div class="hv-window__bar">
+            <div class="hv-dots">
+              <span class="hv-dot hv-dot--red"></span>
+              <span class="hv-dot hv-dot--yellow"></span>
+              <span class="hv-dot hv-dot--green"></span>
+            </div>
+            <span class="hv-window__title">portfolio.ts</span>
+          </div>
+          <div class="hv-window__body">
+            <div class="hv-line">
+              <span class="hv-ln">1</span>
+              <span class="hv-decorator">@Injectable</span><span class="hv-punc">()</span>
+            </div>
+            <div class="hv-line">
+              <span class="hv-ln">2</span>
+              <span class="hv-kw">export class</span>&nbsp;<span class="hv-class">Developer</span>&nbsp;<span class="hv-punc">{</span>
+            </div>
+            <div class="hv-line hv-line--active">
+              <span class="hv-ln">3</span>
+              <span class="hv-i1"></span><span class="hv-prop">name</span><span class="hv-punc">:</span>&nbsp;<span class="hv-str">'Hiren Suthar'</span><span class="hv-punc">;</span>
+            </div>
+            <div class="hv-line">
+              <span class="hv-ln">4</span>
+              <span class="hv-i1"></span><span class="hv-prop">role</span><span class="hv-punc">:</span>&nbsp;<span class="hv-str">'Full Stack Dev'</span><span class="hv-punc">;</span>
+            </div>
+            <div class="hv-line hv-line--empty"><span class="hv-ln">5</span></div>
+            <div class="hv-line">
+              <span class="hv-ln">6</span>
+              <span class="hv-i1"></span><span class="hv-prop">stack</span>&nbsp;<span class="hv-punc">= [</span>
+            </div>
+            <div class="hv-line">
+              <span class="hv-ln">7</span>
+              <span class="hv-i2"></span><span class="hv-str">'Angular'</span><span class="hv-punc">,</span>
+            </div>
+            <div class="hv-line">
+              <span class="hv-ln">8</span>
+              <span class="hv-i2"></span><span class="hv-str">'React'</span><span class="hv-punc">,</span>
+            </div>
+            <div class="hv-line">
+              <span class="hv-ln">9</span>
+              <span class="hv-i2"></span><span class="hv-str">'NestJS'</span><span class="hv-punc">,</span>
+            </div>
+            <div class="hv-line">
+              <span class="hv-ln">10</span>
+              <span class="hv-i2"></span><span class="hv-str">'TypeScript'</span><span class="hv-punc">,</span>
+            </div>
+            <div class="hv-line">
+              <span class="hv-ln">11</span>
+              <span class="hv-i1"></span><span class="hv-punc">];</span>
+            </div>
+            <div class="hv-line hv-line--empty"><span class="hv-ln">12</span></div>
+            <div class="hv-line">
+              <span class="hv-ln">13</span>
+              <span class="hv-i1"></span><span class="hv-fn">build</span><span class="hv-punc">(</span><span class="hv-var">ideas</span><span class="hv-punc">:</span>&nbsp;<span class="hv-class">Idea</span><span class="hv-punc">[])</span>&nbsp;<span class="hv-punc">{</span>
+            </div>
+            <div class="hv-line">
+              <span class="hv-ln">14</span>
+              <span class="hv-i2"></span><span class="hv-kw">return</span>&nbsp;<span class="hv-fn">ship</span><span class="hv-punc">(</span><span class="hv-var">ideas</span><span class="hv-punc">);</span>
+            </div>
+            <div class="hv-line">
+              <span class="hv-ln">15</span>
+              <span class="hv-i1"></span><span class="hv-punc">}</span>
+            </div>
+          </div>
+          <div class="hv-window__fade"></div>
         </div>
 
-        <h1 class="hero__name reveal">
-          <span class="hero__greeting">Hello, I'm</span>
-          Hiren Suthar
-        </h1>
+        <!-- Floating tech badges -->
+        <div class="hv-badge hv-badge--1">
+          <i class="devicon-angularjs-plain colored" aria-hidden="true"></i>
+          Angular
+        </div>
+        <div class="hv-badge hv-badge--2">
+          <i class="devicon-react-original colored" aria-hidden="true"></i>
+          React
+        </div>
+        <div class="hv-badge hv-badge--3">
+          <i class="devicon-nestjs-plain" style="color:#e0234e" aria-hidden="true"></i>
+          NestJS
+        </div>
+        <div class="hv-badge hv-badge--4">
+          <i class="devicon-typescript-plain colored" aria-hidden="true"></i>
+          TypeScript
+        </div>
+        <div class="hv-badge hv-badge--5">
+          <i class="devicon-postgresql-plain colored" aria-hidden="true"></i>
+          PostgreSQL
+        </div>
+      </div>
+    </div>
 
-        <h2 class="hero__role reveal">
-          Full Stack <span class="hero__role-gradient">Developer</span>
-        </h2>
+  </div>
 
-        <p class="hero__headline reveal">
-          Building Modern, Scalable &amp; High-Performance Web Applications.
-        </p>
+  <!-- Scroll indicator -->
+  <div class="hero__scroll" aria-hidden="true">
+    <div class="hero__scroll-line"></div>
+    <span class="hero__scroll-text">SCROLL</span>
+  </div>
+</section>
 
-        <p class="hero__intro reveal">
-          I am a passionate Full Stack Developer focused on building modern, scalable,
-          and user-friendly web applications using modern technologies.
-        </p>
+<!-- ============================================================
+     ABOUT
+     ============================================================ -->
+<section class="about section" id="about">
+  <div class="container">
 
-        <div class="hero__cta reveal">
-          <a href="#projects" class="btn btn--primary">
-            View My Work
-            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17L17 7"/><path d="M7 7h10v10"/></svg>
-          </a>
-          <a href="#contact" class="btn btn--ghost">Contact Me</a>
+    <div class="section-header reveal">
+      <span class="section-eyebrow">WHO I AM</span>
+      <h2 class="section-title">About Me</h2>
+    </div>
+
+    <div class="about__grid">
+      <!-- Left: text + stats -->
+      <div class="about__body reveal">
+        <p>I am a passionate Full Stack Developer focused on building modern, scalable, high-performance web applications and business management systems.</p>
+        <p>I enjoy working on both frontend and backend development, creating clean user interfaces, scalable architectures, efficient APIs, and reliable database systems.</p>
+
+        <div class="about__stats">
+          <div class="about__stat">
+            <div class="about__stat-number">
+              <span class="about__stat-val" data-count="1">1</span><span class="about__stat-sup">+</span>
+            </div>
+            <span class="about__stat-lbl">Years Experience</span>
+          </div>
+          <div class="about__stat">
+            <div class="about__stat-number">
+              <span class="about__stat-val" data-count="10">10</span><span class="about__stat-sup">+</span>
+            </div>
+            <span class="about__stat-lbl">Technologies</span>
+          </div>
+          <div class="about__stat">
+            <div class="about__stat-number">
+              <span class="about__stat-val" data-count="3">3</span><span class="about__stat-sup">+</span>
+            </div>
+            <span class="about__stat-lbl">Major Projects</span>
+          </div>
         </div>
       </div>
 
-      <!-- RIGHT: developer visual -->
-      <div class="hero__right reveal">
-        <div class="hero__visual" id="heroVisual">
-
-          <!-- Subtle grid overlay -->
-          <div class="hv-grid" aria-hidden="true"></div>
-
-          <!-- Glow orb behind window -->
-          <div class="hv-orb" aria-hidden="true"></div>
-
-          <!-- Central code window -->
-          <div class="hv-window" aria-hidden="true">
-            <div class="hv-window__bar">
-              <div class="hv-dots">
-                <span class="hv-dot hv-dot--red"></span>
-                <span class="hv-dot hv-dot--yellow"></span>
-                <span class="hv-dot hv-dot--green"></span>
-              </div>
-              <span class="hv-window__title">app.service.ts</span>
-            </div>
-            <div class="hv-window__body">
-              <div class="hv-line">
-                <span class="hv-ln">1</span>
-                <span class="hv-decorator">@Injectable</span><span class="hv-punc">()</span>
-              </div>
-              <div class="hv-line">
-                <span class="hv-ln">2</span>
-                <span class="hv-kw">export class </span><span class="hv-class">AppService</span><span class="hv-punc"> {</span>
-              </div>
-              <div class="hv-line hv-line--empty"><span class="hv-ln">3</span></div>
-              <div class="hv-line">
-                <span class="hv-ln">4</span>
-                <span class="hv-i1"></span><span class="hv-kw">async </span><span class="hv-fn">getProjects</span><span class="hv-punc">() {</span>
-              </div>
-              <div class="hv-line">
-                <span class="hv-ln">5</span>
-                <span class="hv-i2"></span><span class="hv-kw">return await </span><span class="hv-var">this</span><span class="hv-punc">.</span><span class="hv-fn">repo</span>
-              </div>
-              <div class="hv-line">
-                <span class="hv-ln">6</span>
-                <span class="hv-i3"></span><span class="hv-punc">.</span><span class="hv-fn">find</span><span class="hv-punc">({ </span><span class="hv-prop">status</span><span class="hv-punc">: </span><span class="hv-str">'active'</span><span class="hv-punc"> });</span>
-              </div>
-              <div class="hv-line">
-                <span class="hv-ln">7</span>
-                <span class="hv-i1"></span><span class="hv-punc">}</span>
-              </div>
-              <div class="hv-line hv-line--empty"><span class="hv-ln">8</span></div>
-              <div class="hv-line hv-line--active">
-                <span class="hv-ln">9</span>
-                <span class="hv-i1"></span><span class="hv-fn">build</span><span class="hv-punc">(</span><span class="hv-var">tech</span><span class="hv-punc">: </span><span class="hv-class">string</span><span class="hv-punc">[])</span><span class="hv-punc"> {</span>
-              </div>
-              <div class="hv-line">
-                <span class="hv-ln">10</span>
-                <span class="hv-i2"></span><span class="hv-kw">return </span><span class="hv-punc">{ </span><span class="hv-prop">status</span><span class="hv-punc">: </span><span class="hv-str">'shipped'</span><span class="hv-punc"> };</span>
-              </div>
-              <div class="hv-line">
-                <span class="hv-ln">11</span>
-                <span class="hv-i1"></span><span class="hv-punc">}</span>
-              </div>
-              <div class="hv-line">
-                <span class="hv-ln">12</span>
-                <span class="hv-punc">}</span>
-              </div>
-            </div>
-            <div class="hv-window__fade" aria-hidden="true"></div>
+      <!-- Right: highlight cards -->
+      <div class="about__cards">
+        <div class="highlight-card reveal">
+          <div class="highlight-card__icon">
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
           </div>
+          <h3>Full Stack Development</h3>
+          <p>End-to-end application development from UI to database.</p>
+        </div>
+        <div class="highlight-card reveal">
+          <div class="highlight-card__icon">
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+          </div>
+          <h3>Frontend Development</h3>
+          <p>Modern UIs with Angular, React, and TypeScript.</p>
+        </div>
+        <div class="highlight-card reveal">
+          <div class="highlight-card__icon">
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 20V10M12 20V4M6 20v-6"/></svg>
+          </div>
+          <h3>Backend Development</h3>
+          <p>Scalable APIs with NestJS, Node.js, and .NET.</p>
+        </div>
+        <div class="highlight-card reveal">
+          <div class="highlight-card__icon">
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/></svg>
+          </div>
+          <h3>Database Design</h3>
+          <p>PostgreSQL, MySQL, and SQL Server architecture.</p>
+        </div>
+        <div class="highlight-card reveal">
+          <div class="highlight-card__icon">
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
+          </div>
+          <h3>API Development</h3>
+          <p>RESTful services and integration patterns.</p>
+        </div>
+        <div class="highlight-card reveal">
+          <div class="highlight-card__icon">
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+          </div>
+          <h3>Problem Solving</h3>
+          <p>Analytical thinking and efficient solutions.</p>
+        </div>
+      </div>
+    </div>
 
-          <!-- Floating tech badges -->
-          <div class="hv-badge hv-badge--1">
+  </div>
+</section>
+
+<!-- ============================================================
+     SKILLS
+     ============================================================ -->
+<section class="skills section" id="skills">
+  <div class="container">
+
+    <div class="section-header reveal">
+      <span class="section-eyebrow">WHAT I USE</span>
+      <h2 class="section-title">Skills &amp; Technologies</h2>
+    </div>
+
+    <div class="skills__grid">
+      <div class="skill-group reveal">
+        <div class="skill-group__title">Frontend</div>
+        <div class="skill-list">
+          <div class="skill-pill"><i class="devicon-angularjs-plain colored" aria-hidden="true"></i><span>Angular</span></div>
+          <div class="skill-pill"><i class="devicon-react-original colored" aria-hidden="true"></i><span>React</span></div>
+          <div class="skill-pill"><i class="devicon-typescript-plain colored" aria-hidden="true"></i><span>TypeScript</span></div>
+          <div class="skill-pill"><i class="devicon-javascript-plain colored" aria-hidden="true"></i><span>JavaScript</span></div>
+          <div class="skill-pill"><i class="devicon-html5-plain colored" aria-hidden="true"></i><span>HTML5</span></div>
+          <div class="skill-pill"><i class="devicon-css3-plain colored" aria-hidden="true"></i><span>CSS3</span></div>
+        </div>
+      </div>
+
+      <div class="skill-group reveal">
+        <div class="skill-group__title">Backend</div>
+        <div class="skill-list">
+          <div class="skill-pill"><i class="devicon-nodejs-plain colored" aria-hidden="true"></i><span>Node.js</span></div>
+          <div class="skill-pill"><i class="devicon-nestjs-plain" style="color:#e0234e" aria-hidden="true"></i><span>NestJS</span></div>
+          <div class="skill-pill"><i class="devicon-dot-net-plain colored" aria-hidden="true"></i><span>.NET APIs</span></div>
+        </div>
+      </div>
+
+      <div class="skill-group reveal">
+        <div class="skill-group__title">Databases</div>
+        <div class="skill-list">
+          <div class="skill-pill"><i class="devicon-postgresql-plain colored" aria-hidden="true"></i><span>PostgreSQL</span></div>
+          <div class="skill-pill"><i class="devicon-mysql-plain colored" aria-hidden="true"></i><span>MySQL</span></div>
+          <div class="skill-pill"><i class="devicon-microsoftsqlserver-plain colored" aria-hidden="true"></i><span>SQL Server</span></div>
+        </div>
+      </div>
+
+      <div class="skill-group reveal">
+        <div class="skill-group__title">Tools &amp; Tech</div>
+        <div class="skill-list">
+          <div class="skill-pill"><i class="devicon-git-plain colored" aria-hidden="true"></i><span>Git</span></div>
+          <div class="skill-pill"><i class="devicon-github-original" style="color:#f4f4f5" aria-hidden="true"></i><span>GitHub</span></div>
+          <div class="skill-pill">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
+            <span>REST APIs</span>
+          </div>
+          <div class="skill-pill"><i class="devicon-typescript-plain colored" aria-hidden="true"></i><span>TypeORM</span></div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ============================================================
+     EXPERIENCE
+     ============================================================ -->
+<section class="experience section" id="experience">
+  <div class="container">
+
+    <div class="section-header reveal">
+      <span class="section-eyebrow">MY JOURNEY</span>
+      <h2 class="section-title">Professional Experience</h2>
+    </div>
+
+    <div class="timeline">
+      <div class="timeline__item reveal">
+        <div class="timeline__left" aria-hidden="true">
+          <div class="timeline__dot"></div>
+          <div class="timeline__line"></div>
+        </div>
+        <div class="timeline__card">
+          <div class="timeline__head">
+            <div>
+              <div class="timeline__role">Jr. Software Developer</div>
+              <div class="timeline__company">Kwiqwork Tech Studio LLP</div>
+            </div>
+            <div class="timeline__period">
+              <span class="timeline__status">CURRENT</span>
+              <span class="timeline__date">2024 — Present</span>
+            </div>
+          </div>
+          <ul class="timeline__list">
+            <li>Developing modern web applications using Angular and React</li>
+            <li>Building responsive frontend interfaces with modern UI patterns</li>
+            <li>Developing RESTful APIs using NestJS and .NET frameworks</li>
+            <li>Working with PostgreSQL, MySQL, and SQL Server databases</li>
+            <li>Developing scalable business management systems</li>
+            <li>Implementing new modules and features across projects</li>
+            <li>Fixing bugs and improving application performance</li>
+            <li>Collaborating with development teams on complex features</li>
+          </ul>
+          <div class="timeline__tags">
+            <span class="tag">Angular</span>
+            <span class="tag">React</span>
+            <span class="tag">NestJS</span>
+            <span class="tag">Node.js</span>
+            <span class="tag">PostgreSQL</span>
+            <span class="tag">TypeScript</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ============================================================
+     PROJECTS
+     ============================================================ -->
+<section class="projects section" id="projects">
+  <div class="container">
+
+    <div class="section-header reveal">
+      <span class="section-eyebrow">WHAT I'VE BUILT</span>
+      <h2 class="section-title">Selected Projects</h2>
+    </div>
+
+    <div class="projects__grid">
+
+      <article class="project-card reveal">
+        <div class="project-card__visual project-card__visual--red">
+          <div class="project-card__pattern"></div>
+          <div class="project-card__icons" aria-hidden="true">
             <i class="devicon-angularjs-plain colored"></i>
-            <span>Angular</span>
-          </div>
-          <div class="hv-badge hv-badge--2">
-            <i class="devicon-react-original colored"></i>
-            <span>React</span>
-          </div>
-          <div class="hv-badge hv-badge--3">
-            <i class="devicon-nodejs-plain colored"></i>
-            <span>Node.js</span>
-          </div>
-          <div class="hv-badge hv-badge--4">
-            <i class="devicon-nestjs-plain colored"></i>
-            <span>NestJS</span>
-          </div>
-          <div class="hv-badge hv-badge--5">
+            <i class="devicon-nestjs-plain" style="color:#e0234e"></i>
             <i class="devicon-postgresql-plain colored"></i>
-            <span>PostgreSQL</span>
           </div>
-
+          <span class="project-card__num" aria-hidden="true">01</span>
         </div>
-      </div>
+        <div class="project-card__body">
+          <h3 class="project-card__title">School Management System</h3>
+          <p class="project-card__desc">A comprehensive web application to manage complete school operations including student management, attendance tracking, academics, examinations, HRMS, notifications, and dashboards.</p>
+          <div class="project-card__features">
+            <span class="feature">Student Management</span>
+            <span class="feature">Attendance</span>
+            <span class="feature">Academics</span>
+            <span class="feature">Examinations</span>
+            <span class="feature">HRMS</span>
+            <span class="feature">Notifications</span>
+            <span class="feature">Dashboards</span>
+          </div>
+          <div class="project-card__footer">
+            <div class="project-card__tech">
+              <span class="tech-badge">Angular</span>
+              <span class="tech-badge">NestJS</span>
+              <span class="tech-badge">PostgreSQL</span>
+              <span class="tech-badge">TypeScript</span>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <article class="project-card reveal">
+        <div class="project-card__visual project-card__visual--crimson">
+          <div class="project-card__pattern"></div>
+          <div class="project-card__icons" aria-hidden="true">
+            <i class="devicon-react-original colored"></i>
+            <i class="devicon-nodejs-plain colored"></i>
+            <i class="devicon-mysql-plain colored"></i>
+          </div>
+          <span class="project-card__num" aria-hidden="true">02</span>
+        </div>
+        <div class="project-card__body">
+          <h3 class="project-card__title">CRM System</h3>
+          <p class="project-card__desc">A business management platform for managing leads, employees, customers, and workflows with role-based access control, business expos, notes, and activity tracking.</p>
+          <div class="project-card__features">
+            <span class="feature">Lead Management</span>
+            <span class="feature">Employee Management</span>
+            <span class="feature">Role-Based Access</span>
+            <span class="feature">Business Expos</span>
+            <span class="feature">Notes</span>
+            <span class="feature">Activity Tracking</span>
+          </div>
+          <div class="project-card__footer">
+            <div class="project-card__tech">
+              <span class="tech-badge">React</span>
+              <span class="tech-badge">Node.js</span>
+              <span class="tech-badge">MySQL</span>
+              <span class="tech-badge">TypeScript</span>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <article class="project-card reveal">
+        <div class="project-card__visual project-card__visual--ember">
+          <div class="project-card__pattern"></div>
+          <div class="project-card__icons" aria-hidden="true">
+            <i class="devicon-angularjs-plain colored"></i>
+            <i class="devicon-dot-net-plain colored"></i>
+            <i class="devicon-microsoftsqlserver-plain colored"></i>
+          </div>
+          <span class="project-card__num" aria-hidden="true">03</span>
+        </div>
+        <div class="project-card__body">
+          <h3 class="project-card__title">Business Management Platform</h3>
+          <p class="project-card__desc">A scalable platform for managing business operations and workflows, built with modern web technologies to handle complex business processes and improve operational efficiency.</p>
+          <div class="project-card__features">
+            <span class="feature">Operations Management</span>
+            <span class="feature">Workflow Automation</span>
+            <span class="feature">Analytics</span>
+            <span class="feature">Reporting</span>
+          </div>
+          <div class="project-card__footer">
+            <div class="project-card__tech">
+              <span class="tech-badge">Angular</span>
+              <span class="tech-badge">.NET</span>
+              <span class="tech-badge">SQL Server</span>
+              <span class="tech-badge">TypeScript</span>
+            </div>
+          </div>
+        </div>
+      </article>
 
     </div>
+  </div>
+</section>
 
-    <div class="hero__scroll">
-      <div class="hero__scroll-line"></div>
-      <span class="hero__scroll-text">Scroll</span>
+<!-- ============================================================
+     CONTACT
+     ============================================================ -->
+<section class="contact section" id="contact">
+  <div class="container">
+
+    <div class="section-header reveal">
+      <span class="section-eyebrow">GET IN TOUCH</span>
+      <h2 class="section-title">Let's Work Together</h2>
+      <p class="section-subtitle">Have a project in mind or want to work together? Feel free to get in touch.</p>
     </div>
-  </section>
 
-  <!-- ========== ABOUT ========== -->
-  <section class="about section" id="about">
-    <div class="container">
-      <div class="section-header reveal">
-        <span class="section-eyebrow">Who I Am</span>
-        <h2 class="section-title">About Me</h2>
-      </div>
-
-      <div class="about__grid">
-        <div class="about__body reveal">
-          <p>I am a Full Stack Developer with experience building modern web applications and business management systems.</p>
-          <p>I enjoy working on both frontend and backend development, creating scalable applications, clean user interfaces, and efficient APIs.</p>
-          <p>I have experience working with modern technologies including Angular, React, Node.js, NestJS, .NET APIs, and relational databases.</p>
-
-          <div class="about__stats">
-            <div class="about__stat">
-              <span class="about__stat-val">1+</span>
-              <span class="about__stat-lbl">Year Experience</span>
-            </div>
-            <div class="about__stat">
-              <span class="about__stat-val">10+</span>
-              <span class="about__stat-lbl">Technologies</span>
-            </div>
-            <div class="about__stat">
-              <span class="about__stat-val">3+</span>
-              <span class="about__stat-lbl">Projects Built</span>
-            </div>
-          </div>
-        </div>
-
-        <div class="about__cards reveal">
-          <div class="highlight-card">
-            <div class="highlight-card__icon">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
-            </div>
-            <h3>Full Stack Development</h3>
-            <p>End-to-end application development from concept to deployment</p>
-          </div>
-
-          <div class="highlight-card">
-            <div class="highlight-card__icon">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
-            </div>
-            <h3>Frontend Development</h3>
-            <p>Modern, responsive UIs with Angular and React</p>
-          </div>
-
-          <div class="highlight-card">
-            <div class="highlight-card__icon">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="2" width="20" height="8" rx="2"/><rect x="2" y="14" width="20" height="8" rx="2"/><line x1="6" y1="6" x2="6.01" y2="6"/><line x1="6" y1="18" x2="6.01" y2="18"/></svg>
-            </div>
-            <h3>Backend Development</h3>
-            <p>Scalable APIs with Node.js, NestJS, and .NET</p>
-          </div>
-
-          <div class="highlight-card">
-            <div class="highlight-card__icon">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/></svg>
-            </div>
-            <h3>Database Design</h3>
-            <p>Efficient schemas with PostgreSQL, MySQL, SQL Server</p>
-          </div>
-
-          <div class="highlight-card">
-            <div class="highlight-card__icon">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 20V10"/><path d="M12 20V4"/><path d="M6 20v-6"/></svg>
-            </div>
-            <h3>API Development</h3>
-            <p>RESTful API design, development, and integration</p>
-          </div>
-
-          <div class="highlight-card">
-            <div class="highlight-card__icon">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="9" y1="18" x2="15" y2="18"/><line x1="10" y1="22" x2="14" y2="22"/><path d="M15.09 14c.18-.98.65-1.74 1.41-2.5A4.65 4.65 0 0 0 18 8 6 6 0 0 0 6 8c0 1 .23 2.23 1.5 3.5A4.61 4.61 0 0 1 8.91 14"/></svg>
-            </div>
-            <h3>Problem Solving</h3>
-            <p>Analytical approach to complex technical challenges</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ========== SKILLS ========== -->
-  <section class="skills section" id="skills">
-    <div class="container">
-      <div class="section-header reveal">
-        <span class="section-eyebrow">What I Use</span>
-        <h2 class="section-title">Skills &amp; Technologies</h2>
-      </div>
-
-      <div class="skills__grid">
-
-        <div class="skill-group reveal">
-          <h3 class="skill-group__title">Frontend</h3>
-          <div class="skill-list">
-            <div class="skill-pill"><i class="devicon-angularjs-plain colored"></i><span>Angular</span></div>
-            <div class="skill-pill"><i class="devicon-react-original colored"></i><span>React</span></div>
-            <div class="skill-pill"><i class="devicon-typescript-plain colored"></i><span>TypeScript</span></div>
-            <div class="skill-pill"><i class="devicon-javascript-plain colored"></i><span>JavaScript</span></div>
-            <div class="skill-pill"><i class="devicon-html5-plain colored"></i><span>HTML5</span></div>
-            <div class="skill-pill"><i class="devicon-css3-plain colored"></i><span>CSS3</span></div>
-          </div>
-        </div>
-
-        <div class="skill-group reveal">
-          <h3 class="skill-group__title">Backend</h3>
-          <div class="skill-list">
-            <div class="skill-pill"><i class="devicon-nodejs-plain colored"></i><span>Node.js</span></div>
-            <div class="skill-pill"><i class="devicon-nestjs-plain colored"></i><span>NestJS</span></div>
-            <div class="skill-pill">
-              <svg width="22" height="22" viewBox="0 0 22 22" aria-hidden="true">
-                <rect width="22" height="22" rx="4" fill="#512BD4" fill-opacity="0.25"/>
-                <text x="11" y="15" text-anchor="middle" fill="#818cf8" font-family="Inter,sans-serif" font-weight="700" font-size="6.5">.NET</text>
-              </svg>
-              <span>.NET APIs</span>
-            </div>
-          </div>
-        </div>
-
-        <div class="skill-group reveal">
-          <h3 class="skill-group__title">Databases</h3>
-          <div class="skill-list">
-            <div class="skill-pill"><i class="devicon-postgresql-plain colored"></i><span>PostgreSQL</span></div>
-            <div class="skill-pill"><i class="devicon-mysql-plain colored"></i><span>MySQL</span></div>
-            <div class="skill-pill"><i class="devicon-microsoftsqlserver-plain colored"></i><span>SQL Server</span></div>
-          </div>
-        </div>
-
-        <div class="skill-group reveal">
-          <h3 class="skill-group__title">Tools &amp; Technologies</h3>
-          <div class="skill-list">
-            <div class="skill-pill"><i class="devicon-git-plain colored"></i><span>Git</span></div>
-            <div class="skill-pill"><i class="devicon-github-original"></i><span>GitHub</span></div>
-            <div class="skill-pill">
-              <svg width="22" height="22" viewBox="0 0 22 22" aria-hidden="true">
-                <rect width="22" height="22" rx="4" fill="#06b6d4" fill-opacity="0.12"/>
-                <text x="11" y="15" text-anchor="middle" fill="#22d3ee" font-family="Inter,sans-serif" font-weight="700" font-size="6">REST</text>
-              </svg>
-              <span>REST APIs</span>
-            </div>
-            <div class="skill-pill">
-              <svg width="22" height="22" viewBox="0 0 22 22" aria-hidden="true">
-                <rect width="22" height="22" rx="4" fill="#e0234e" fill-opacity="0.12"/>
-                <text x="11" y="15" text-anchor="middle" fill="#fb7185" font-family="Inter,sans-serif" font-weight="700" font-size="5.5">ORM</text>
-              </svg>
-              <span>TypeORM</span>
-            </div>
-          </div>
-        </div>
-
-      </div>
-    </div>
-  </section>
-
-  <!-- ========== EXPERIENCE ========== -->
-  <section class="experience section" id="experience">
-    <div class="container">
-      <div class="section-header reveal">
-        <span class="section-eyebrow">My Journey</span>
-        <h2 class="section-title">Professional Experience</h2>
-      </div>
-
-      <div class="timeline">
-        <div class="timeline__item reveal">
-          <div class="timeline__left">
-            <div class="timeline__dot"></div>
-            <div class="timeline__line"></div>
-          </div>
-          <div class="timeline__card">
-            <div class="timeline__head">
-              <div class="timeline__meta">
-                <h3 class="timeline__role">Jr. Software Developer</h3>
-                <p class="timeline__company">Kwiqwork Tech Studio LLP</p>
-              </div>
-              <div class="timeline__period">
-                <span class="timeline__status">Current</span>
-                <span class="timeline__date">2024 — Present</span>
-              </div>
-            </div>
-            <ul class="timeline__list">
-              <li>Developing modern web applications with Angular and React</li>
-              <li>Building responsive frontend interfaces with clean UI/UX</li>
-              <li>Developing RESTful APIs with NestJS and .NET</li>
-              <li>Working with databases including PostgreSQL and SQL Server</li>
-              <li>Implementing new modules and features for business management systems</li>
-              <li>Fixing bugs and improving application performance</li>
-              <li>Collaborating with development teams in an agile environment</li>
-            </ul>
-            <div class="timeline__tags">
-              <span class="tag">Angular</span>
-              <span class="tag">React</span>
-              <span class="tag">NestJS</span>
-              <span class="tag">Node.js</span>
-              <span class="tag">PostgreSQL</span>
-              <span class="tag">TypeScript</span>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ========== PROJECTS ========== -->
-  <section class="projects section" id="projects">
-    <div class="container">
-      <div class="section-header reveal">
-        <span class="section-eyebrow">What I've Built</span>
-        <h2 class="section-title">Selected Projects</h2>
-      </div>
-
-      <div class="projects__grid">
-
-        <!-- Project 1 -->
-        <article class="project-card reveal">
-          <div class="project-card__visual project-card__visual--indigo">
-            <div class="project-card__pattern"></div>
-            <div class="project-card__icons" aria-hidden="true">
-              <span>&#127979;</span>
-              <span>&#127891;</span>
-              <span>&#128202;</span>
-            </div>
-            <span class="project-card__num">01</span>
-          </div>
-          <div class="project-card__body">
-            <h3 class="project-card__title">School Management System</h3>
-            <p class="project-card__desc">A comprehensive web application designed to manage school operations including student management, attendance tracking, academics, examination management, HRMS, notifications, and insightful dashboards.</p>
-            <div class="project-card__features">
-              <span class="feature">Student Management</span>
-              <span class="feature">Attendance</span>
-              <span class="feature">Academics</span>
-              <span class="feature">Examination</span>
-              <span class="feature">HRMS</span>
-              <span class="feature">Dashboards</span>
-            </div>
-            <div class="project-card__footer">
-              <div class="project-card__tech">
-                <span class="tech-badge">Angular</span>
-                <span class="tech-badge">NestJS</span>
-                <span class="tech-badge">PostgreSQL</span>
-              </div>
-            </div>
-          </div>
-        </article>
-
-        <!-- Project 2 -->
-        <article class="project-card reveal">
-          <div class="project-card__visual project-card__visual--cyan">
-            <div class="project-card__pattern"></div>
-            <div class="project-card__icons" aria-hidden="true">
-              <span>&#128188;</span>
-              <span>&#128200;</span>
-              <span>&#128101;</span>
-            </div>
-            <span class="project-card__num">02</span>
-          </div>
-          <div class="project-card__body">
-            <h3 class="project-card__title">CRM System</h3>
-            <p class="project-card__desc">A business management platform designed to manage leads, employees, customers, and business workflows with role-based access control, business expos, notes, and comprehensive activity tracking.</p>
-            <div class="project-card__features">
-              <span class="feature">Lead Management</span>
-              <span class="feature">Employee Mgmt</span>
-              <span class="feature">Role-Based Access</span>
-              <span class="feature">Business Expos</span>
-              <span class="feature">Activity Tracking</span>
-            </div>
-            <div class="project-card__footer">
-              <div class="project-card__tech">
-                <span class="tech-badge">Angular</span>
-                <span class="tech-badge">NestJS</span>
-                <span class="tech-badge">PostgreSQL</span>
-              </div>
-            </div>
-          </div>
-        </article>
-
-        <!-- Project 3 -->
-        <article class="project-card reveal">
-          <div class="project-card__visual project-card__visual--amber">
-            <div class="project-card__pattern"></div>
-            <div class="project-card__icons" aria-hidden="true">
-              <span>&#9881;&#65039;</span>
-              <span>&#128203;</span>
-              <span>&#128640;</span>
-            </div>
-            <span class="project-card__num">03</span>
-          </div>
-          <div class="project-card__body">
-            <h3 class="project-card__title">Business Management Platform</h3>
-            <p class="project-card__desc">A scalable platform for managing business operations and workflows, built with modern web technologies to handle complex business processes and improve operational efficiency.</p>
-            <div class="project-card__features">
-              <span class="feature">Operations Mgmt</span>
-              <span class="feature">Workflow Automation</span>
-              <span class="feature">Analytics</span>
-              <span class="feature">Reporting</span>
-            </div>
-            <div class="project-card__footer">
-              <div class="project-card__tech">
-                <span class="tech-badge">React</span>
-                <span class="tech-badge">Node.js</span>
-                <span class="tech-badge">SQL Server</span>
-              </div>
-            </div>
-          </div>
-        </article>
-
-      </div>
-    </div>
-  </section>
-
-  <!-- ========== CONTACT ========== -->
-  <section class="contact section" id="contact">
-    <div class="container">
-      <div class="section-header reveal">
-        <span class="section-eyebrow">Get In Touch</span>
-        <h2 class="section-title">Let's Work Together</h2>
-        <p class="section-subtitle">Have a project in mind or want to work together? Feel free to get in touch.</p>
-      </div>
-
-      <form class="contact-form reveal" id="contactForm" novalidate>
-        <div class="form-row">
-          <div class="form-field">
-            <label for="contactName">Name</label>
-            <input type="text" id="contactName" name="name" placeholder="Your name" required autocomplete="name">
-          </div>
-          <div class="form-field">
-            <label for="contactEmail">Email</label>
-            <input type="email" id="contactEmail" name="email" placeholder="your.email@example.com" required autocomplete="email">
-          </div>
+    <form class="contact-form reveal" id="contactForm" novalidate>
+      <div class="form-row">
+        <div class="form-field">
+          <label for="contactName">Name</label>
+          <input type="text" id="contactName" name="name" placeholder="Your name" required>
         </div>
         <div class="form-field">
-          <label for="contactMessage">Message</label>
-          <textarea id="contactMessage" name="message" rows="6" placeholder="Tell me about your project or idea..." required></textarea>
+          <label for="contactEmail">Email</label>
+          <input type="email" id="contactEmail" name="email" placeholder="your@email.com" required>
         </div>
-        <button type="submit" class="btn btn--primary btn--full" id="submitBtn">
-          <span class="submit-text">Send Message</span>
-          <svg class="submit-icon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
-        </button>
-      </form>
-    </div>
-  </section>
+      </div>
+      <div class="form-field">
+        <label for="contactMessage">Message</label>
+        <textarea id="contactMessage" name="message" rows="6" placeholder="Tell me about your project or idea..." required></textarea>
+      </div>
+      <button type="submit" class="btn btn--primary btn--full" id="submitBtn">
+        <span class="submit-text">Send Message</span>
+        <span class="submit-icon">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+        </span>
+      </button>
+    </form>
 
-  <!-- ========== FOOTER ========== -->
-  <footer class="footer">
-    <div class="container footer__inner">
-      <a href="#home" class="footer__logo">
-        <span class="clr-accent">&lt;</span>HS<span class="clr-accent">/&gt;</span>
-      </a>
-      <p class="footer__copy">Designed &amp; Built by Hiren Suthar</p>
-      <p class="footer__year">&copy; <span id="footerYear"></span> Hiren Suthar. All rights reserved.</p>
-    </div>
-  </footer>
+  </div>
+</section>
 
-  <script src="js/main.js"></script>
+<!-- ============================================================
+     FOOTER
+     ============================================================ -->
+<footer class="footer">
+  <div class="container footer__inner">
+    <a href="#home" class="footer__logo">&lt;HS/&gt;</a>
+    <p class="footer__copy">Designed &amp; Built by Hiren Suthar</p>
+    <p class="footer__year">&copy; <span id="footerYear"></span> Hiren Suthar. All rights reserved.</p>
+  </div>
+</footer>
+
+<script src="js/main.js"></script>
 </body>
 </html>
