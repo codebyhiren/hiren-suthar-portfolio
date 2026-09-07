@@ -240,6 +240,52 @@
   });
 })();
 
+/* ---------- HERO VISUAL PARALLAX ---------- */
+(function initParallax() {
+  const visual  = document.getElementById('heroVisual');
+  const hero    = document.getElementById('home');
+  if (!visual || !hero) return;
+
+  const badges  = visual.querySelectorAll('.hv-badge');
+  const window_ = visual.querySelector('.hv-window');
+  let active    = true;
+
+  // Pause when hero is off-screen
+  const obs = new IntersectionObserver(entries => {
+    active = entries[0].isIntersecting;
+  }, { threshold: 0.01 });
+  obs.observe(hero);
+
+  let cx = 0, cy = 0; // current smoothed values
+  let tx = 0, ty = 0; // target
+
+  document.addEventListener('mousemove', e => {
+    if (!active) return;
+    const rect = hero.getBoundingClientRect();
+    tx = ((e.clientX - rect.left) / rect.width  - 0.5) * 2;
+    ty = ((e.clientY - rect.top)  / rect.height - 0.5) * 2;
+  });
+
+  function tick() {
+    if (active) {
+      cx += (tx - cx) * 0.055;
+      cy += (ty - cy) * 0.055;
+
+      // Whole visual drifts gently with cursor
+      visual.style.transform = `translate(${cx * 7}px, ${cy * 5}px)`;
+
+      // Window shifts slightly in the opposite direction for depth
+      if (window_) {
+        window_.style.transform =
+          `translate(calc(-50% + ${cx * -3}px), calc(-50% + ${cy * -2}px))`;
+      }
+      // Note: badges keep their CSS float animations untouched
+    }
+    requestAnimationFrame(tick);
+  }
+  tick();
+})();
+
 /* ---------- FOOTER YEAR ---------- */
 (function setYear() {
   const el = document.getElementById('footerYear');

@@ -41,49 +41,134 @@
     <div class="hero__glow hero__glow--left"></div>
     <div class="hero__glow hero__glow--right"></div>
 
-    <div class="container hero__content">
-      <div class="hero__badge reveal">
-        <span class="hero__badge-dot"></span>
-        Available for opportunities
-      </div>
+    <div class="container hero__layout">
 
-      <h1 class="hero__name reveal">
-        <span class="hero__greeting">Hello, I'm</span>
-        Hiren Suthar
-      </h1>
+      <!-- LEFT: introduction -->
+      <div class="hero__left">
+        <div class="hero__badge reveal">
+          <span class="hero__badge-dot"></span>
+          Available for opportunities
+        </div>
 
-      <h2 class="hero__role reveal">
-        Full Stack <span class="hero__role-gradient">Developer</span>
-      </h2>
+        <h1 class="hero__name reveal">
+          <span class="hero__greeting">Hello, I'm</span>
+          Hiren Suthar
+        </h1>
 
-      <p class="hero__headline reveal">
-        Building Modern, Scalable &amp; High-Performance Web Applications.
-      </p>
+        <h2 class="hero__role reveal">
+          Full Stack <span class="hero__role-gradient">Developer</span>
+        </h2>
 
-      <p class="hero__intro reveal">
-        I am a passionate Full Stack Developer focused on building modern, scalable,
-        and user-friendly web applications using modern technologies.
-      </p>
+        <p class="hero__headline reveal">
+          Building Modern, Scalable &amp; High-Performance Web Applications.
+        </p>
 
-      <div class="hero__cta reveal">
-        <a href="#projects" class="btn btn--primary">
-          View My Work
-          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17L17 7"/><path d="M7 7h10v10"/></svg>
-        </a>
-        <a href="#contact" class="btn btn--ghost">Contact Me</a>
-      </div>
+        <p class="hero__intro reveal">
+          I am a passionate Full Stack Developer focused on building modern, scalable,
+          and user-friendly web applications using modern technologies.
+        </p>
 
-      <div class="hero__stack reveal">
-        <span class="hero__stack-label">Tech Stack</span>
-        <div class="hero__stack-icons">
-          <span class="stack-icon" title="Angular"><i class="devicon-angularjs-plain colored"></i></span>
-          <span class="stack-icon" title="React"><i class="devicon-react-original colored"></i></span>
-          <span class="stack-icon" title="Node.js"><i class="devicon-nodejs-plain colored"></i></span>
-          <span class="stack-icon" title="NestJS"><i class="devicon-nestjs-plain colored"></i></span>
-          <span class="stack-icon" title="TypeScript"><i class="devicon-typescript-plain colored"></i></span>
-          <span class="stack-icon" title="PostgreSQL"><i class="devicon-postgresql-plain colored"></i></span>
+        <div class="hero__cta reveal">
+          <a href="#projects" class="btn btn--primary">
+            View My Work
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17L17 7"/><path d="M7 7h10v10"/></svg>
+          </a>
+          <a href="#contact" class="btn btn--ghost">Contact Me</a>
         </div>
       </div>
+
+      <!-- RIGHT: developer visual -->
+      <div class="hero__right reveal">
+        <div class="hero__visual" id="heroVisual">
+
+          <!-- Subtle grid overlay -->
+          <div class="hv-grid" aria-hidden="true"></div>
+
+          <!-- Glow orb behind window -->
+          <div class="hv-orb" aria-hidden="true"></div>
+
+          <!-- Central code window -->
+          <div class="hv-window" aria-hidden="true">
+            <div class="hv-window__bar">
+              <div class="hv-dots">
+                <span class="hv-dot hv-dot--red"></span>
+                <span class="hv-dot hv-dot--yellow"></span>
+                <span class="hv-dot hv-dot--green"></span>
+              </div>
+              <span class="hv-window__title">app.service.ts</span>
+            </div>
+            <div class="hv-window__body">
+              <div class="hv-line">
+                <span class="hv-ln">1</span>
+                <span class="hv-decorator">@Injectable</span><span class="hv-punc">()</span>
+              </div>
+              <div class="hv-line">
+                <span class="hv-ln">2</span>
+                <span class="hv-kw">export class </span><span class="hv-class">AppService</span><span class="hv-punc"> {</span>
+              </div>
+              <div class="hv-line hv-line--empty"><span class="hv-ln">3</span></div>
+              <div class="hv-line">
+                <span class="hv-ln">4</span>
+                <span class="hv-i1"></span><span class="hv-kw">async </span><span class="hv-fn">getProjects</span><span class="hv-punc">() {</span>
+              </div>
+              <div class="hv-line">
+                <span class="hv-ln">5</span>
+                <span class="hv-i2"></span><span class="hv-kw">return await </span><span class="hv-var">this</span><span class="hv-punc">.</span><span class="hv-fn">repo</span>
+              </div>
+              <div class="hv-line">
+                <span class="hv-ln">6</span>
+                <span class="hv-i3"></span><span class="hv-punc">.</span><span class="hv-fn">find</span><span class="hv-punc">({ </span><span class="hv-prop">status</span><span class="hv-punc">: </span><span class="hv-str">'active'</span><span class="hv-punc"> });</span>
+              </div>
+              <div class="hv-line">
+                <span class="hv-ln">7</span>
+                <span class="hv-i1"></span><span class="hv-punc">}</span>
+              </div>
+              <div class="hv-line hv-line--empty"><span class="hv-ln">8</span></div>
+              <div class="hv-line hv-line--active">
+                <span class="hv-ln">9</span>
+                <span class="hv-i1"></span><span class="hv-fn">build</span><span class="hv-punc">(</span><span class="hv-var">tech</span><span class="hv-punc">: </span><span class="hv-class">string</span><span class="hv-punc">[])</span><span class="hv-punc"> {</span>
+              </div>
+              <div class="hv-line">
+                <span class="hv-ln">10</span>
+                <span class="hv-i2"></span><span class="hv-kw">return </span><span class="hv-punc">{ </span><span class="hv-prop">status</span><span class="hv-punc">: </span><span class="hv-str">'shipped'</span><span class="hv-punc"> };</span>
+              </div>
+              <div class="hv-line">
+                <span class="hv-ln">11</span>
+                <span class="hv-i1"></span><span class="hv-punc">}</span>
+              </div>
+              <div class="hv-line">
+                <span class="hv-ln">12</span>
+                <span class="hv-punc">}</span>
+              </div>
+            </div>
+            <div class="hv-window__fade" aria-hidden="true"></div>
+          </div>
+
+          <!-- Floating tech badges -->
+          <div class="hv-badge hv-badge--1">
+            <i class="devicon-angularjs-plain colored"></i>
+            <span>Angular</span>
+          </div>
+          <div class="hv-badge hv-badge--2">
+            <i class="devicon-react-original colored"></i>
+            <span>React</span>
+          </div>
+          <div class="hv-badge hv-badge--3">
+            <i class="devicon-nodejs-plain colored"></i>
+            <span>Node.js</span>
+          </div>
+          <div class="hv-badge hv-badge--4">
+            <i class="devicon-nestjs-plain colored"></i>
+            <span>NestJS</span>
+          </div>
+          <div class="hv-badge hv-badge--5">
+            <i class="devicon-postgresql-plain colored"></i>
+            <span>PostgreSQL</span>
+          </div>
+
+        </div>
+      </div>
+
     </div>
 
     <div class="hero__scroll">
