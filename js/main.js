@@ -1,403 +1,461 @@
-/* ============================================================
-   HIREN SUTHAR PORTFOLIO — MAIN SCRIPT
-   ============================================================ */
+'use strict';
 
-/* ---------- HERO CANVAS PARTICLE NETWORK ---------- */
-(function initCanvas() {
+/* ============================================================
+   CURSOR (desktop only)
+   ============================================================ */
+function initCursor() {
+  const cursor = document.getElementById('cursor');
+  if (!cursor || !window.matchMedia('(pointer: fine)').matches) return;
+
+  let cx = 0, cy = 0;
+  let rx = 0, ry = 0;
+
+  const dot  = cursor.querySelector('.cursor__dot');
+  const ring = cursor.querySelector('.cursor__ring');
+
+  document.addEventListener('mousemove', e => {
+    cx = e.clientX;
+    cy = e.clientY;
+    cursor.style.transform = `translate(${cx}px, ${cy}px)`;
+  });
+
+  // Ring lags behind with rAF
+  function animateRing() {
+    rx += (cx - rx) * 0.12;
+    ry += (cy - ry) * 0.12;
+    ring.style.transform = `translate(${rx - cx}px, ${ry - cy}px)`;
+    requestAnimationFrame(animateRing);
+  }
+  animateRing();
+
+  // Hover state
+  const hoverTargets = 'a, button, [role="button"], input, textarea, select, .service-item, .project';
+  document.addEventListener('mouseover', e => {
+    if (e.target.closest(hoverTargets)) cursor.classList.add('is-hover');
+  });
+  document.addEventListener('mouseout', e => {
+    if (e.target.closest(hoverTargets)) cursor.classList.remove('is-hover');
+  });
+  document.addEventListener('mousedown', () => cursor.classList.add('is-click'));
+  document.addEventListener('mouseup', () => cursor.classList.remove('is-click'));
+}
+
+/* ============================================================
+   NAVIGATION — scroll state, burger, active links
+   ============================================================ */
+function initNav() {
+  const nav    = document.getElementById('nav');
+  const burger = document.getElementById('navBurger');
+  const links  = document.getElementById('navLinks');
+  if (!nav) return;
+
+  // Scroll: add .is-scrolled class
+  const onScroll = () => {
+    nav.classList.toggle('is-scrolled', window.scrollY > 20);
+    highlightActiveSection();
+  };
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+
+  // Burger toggle
+  function setNavOpen(open) {
+    nav.classList.toggle('is-open', open);
+    burger.setAttribute('aria-expanded', String(open));
+    if (links) links.setAttribute('aria-hidden', String(!open));
+    document.body.style.overflow = open ? 'hidden' : '';
+  }
+
+  if (burger) {
+    burger.addEventListener('click', () => setNavOpen(!nav.classList.contains('is-open')));
+  }
+
+  // Close on link click (mobile)
+  if (links) {
+    links.querySelectorAll('.nav__link').forEach(link => {
+      link.addEventListener('click', () => setNavOpen(false));
+    });
+  }
+
+  // Close on outside click
+  document.addEventListener('click', e => {
+    if (nav.classList.contains('is-open') && !nav.contains(e.target)) setNavOpen(false);
+  });
+
+  // Keyboard: Escape closes
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape' && nav.classList.contains('is-open')) setNavOpen(false);
+  });
+
+  // Active section highlighting
+  const sections = Array.from(document.querySelectorAll('section[id]'));
+  const navLinks = document.querySelectorAll('.nav__link');
+
+  function highlightActiveSection() {
+    const offset = parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--nav-h')) || 72;
+    let current = '';
+    sections.forEach(sec => {
+      if (window.scrollY >= sec.offsetTop - offset - 80) current = sec.id;
+    });
+    navLinks.forEach(link => {
+      const href = link.getAttribute('href')?.replace('#', '');
+      link.classList.toggle('is-active', href === current);
+    });
+  }
+}
+
+/* ============================================================
+   SMOOTH SCROLL — respect nav height
+   ============================================================ */
+function initSmoothScroll() {
+  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', e => {
+      const id  = anchor.getAttribute('href').replace('#', '');
+      const target = id ? document.getElementById(id) : null;
+      if (!target) return;
+      e.preventDefault();
+      const navH = parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--nav-h')) || 72;
+      const top  = target.getBoundingClientRect().top + window.scrollY - navH;
+      window.scrollTo({ top, behavior: 'smooth' });
+    });
+  });
+}
+
+/* ============================================================
+   HERO VERB CYCLING
+   ============================================================ */
+function initHeroVerb() {
+  const el    = document.getElementById('heroVerb');
+  if (!el) return;
+  const verbs = ['BUILD', 'CREATE', 'SHIP', 'SOLVE'];
+  let idx = 0;
+
+  setInterval(() => {
+    el.classList.add('fading');
+    setTimeout(() => {
+      idx = (idx + 1) % verbs.length;
+      el.textContent = verbs[idx];
+      el.classList.remove('fading');
+    }, 320);
+  }, 2600);
+}
+
+/* ============================================================
+   SCROLL REVEAL — elements with class .reveal
+   ============================================================ */
+function initReveal() {
+  const elements = document.querySelectorAll('.reveal');
+  if (!elements.length) return;
+
+  const revealEl = el => el.classList.add('is-visible');
+
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        revealEl(entry.target);
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0, rootMargin: '0px 0px 0px 0px' });
+
+  elements.forEach(el => {
+    // Instantly reveal if already in viewport
+    const rect = el.getBoundingClientRect();
+    if (rect.top < window.innerHeight && rect.bottom > 0) {
+      revealEl(el);
+    } else {
+      observer.observe(el);
+    }
+  });
+}
+
+/* ============================================================
+   TEXT LINE REVEALS — elements with .reveal-line children
+   ============================================================ */
+function initLineReveal() {
+  const containers = document.querySelectorAll('.about__headline, .section-title, .contact__headline');
+  if (!containers.length) return;
+
+  const revealEl = el => el.classList.add('is-revealed');
+
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        revealEl(entry.target);
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0, rootMargin: '0px 0px 0px 0px' });
+
+  containers.forEach(el => {
+    const rect = el.getBoundingClientRect();
+    if (rect.top < window.innerHeight && rect.bottom > 0) {
+      revealEl(el);
+    } else {
+      observer.observe(el);
+    }
+  });
+}
+
+/* ============================================================
+   CANVAS PARTICLES — red particle network
+   ============================================================ */
+function initCanvas() {
   const canvas = document.getElementById('heroCanvas');
   if (!canvas) return;
 
-  const ctx   = canvas.getContext('2d');
-  const COLOR = '225, 29, 72'; // red accent
-  let particles = [];
-  let raf;
+  const ctx = canvas.getContext('2d');
+  const COLOR = '225, 29, 72';
+  const PARTICLE_COUNT = 60;
+  const MAX_DIST = 130;
+  const SPEED = 0.4;
+
+  let W, H, particles = [], raf;
+  let active = true;
 
   function resize() {
-    canvas.width  = window.innerWidth;
-    canvas.height = window.innerHeight;
+    W = canvas.width  = canvas.offsetWidth;
+    H = canvas.height = canvas.offsetHeight;
   }
+  window.addEventListener('resize', resize, { passive: true });
+  resize();
 
   class Particle {
-    constructor() { this.init(); }
-    init() {
-      this.x  = Math.random() * canvas.width;
-      this.y  = Math.random() * canvas.height;
-      this.vx = (Math.random() - 0.5) * 0.3;
-      this.vy = (Math.random() - 0.5) * 0.3;
-      this.r  = Math.random() * 1.4 + 0.4;
-      this.a  = Math.random() * 0.28 + 0.06;
+    constructor() { this.reset(); this.x = Math.random() * W; this.y = Math.random() * H; }
+    reset() {
+      this.x  = Math.random() * W;
+      this.y  = Math.random() * H;
+      this.vx = (Math.random() - 0.5) * SPEED;
+      this.vy = (Math.random() - 0.5) * SPEED;
+      this.r  = Math.random() * 1.5 + 0.5;
     }
     update() {
       this.x += this.vx;
       this.y += this.vy;
-      if (this.x < 0 || this.x > canvas.width || this.y < 0 || this.y > canvas.height) {
-        this.init();
-      }
+      if (this.x < 0 || this.x > W) this.vx *= -1;
+      if (this.y < 0 || this.y > H) this.vy *= -1;
     }
     draw() {
       ctx.beginPath();
       ctx.arc(this.x, this.y, this.r, 0, Math.PI * 2);
-      ctx.fillStyle = `rgba(${COLOR}, ${this.a})`;
+      ctx.fillStyle = `rgba(${COLOR}, 0.55)`;
       ctx.fill();
     }
   }
 
-  function buildParticles() {
-    particles = [];
-    const count = Math.min(80, Math.floor((canvas.width * canvas.height) / 18000));
-    for (let i = 0; i < count; i++) particles.push(new Particle());
-  }
+  for (let i = 0; i < PARTICLE_COUNT; i++) particles.push(new Particle());
 
-  function drawLines() {
-    const MAX_DIST = 120;
+  function draw() {
+    if (!active) return;
+    ctx.clearRect(0, 0, W, H);
+    particles.forEach(p => { p.update(); p.draw(); });
+
     for (let i = 0; i < particles.length; i++) {
       for (let j = i + 1; j < particles.length; j++) {
         const dx = particles[i].x - particles[j].x;
         const dy = particles[i].y - particles[j].y;
         const d  = Math.sqrt(dx * dx + dy * dy);
         if (d < MAX_DIST) {
-          const alpha = (1 - d / MAX_DIST) * 0.08;
           ctx.beginPath();
           ctx.moveTo(particles[i].x, particles[i].y);
           ctx.lineTo(particles[j].x, particles[j].y);
-          ctx.strokeStyle = `rgba(${COLOR}, ${alpha})`;
-          ctx.lineWidth = 0.6;
+          ctx.strokeStyle = `rgba(${COLOR}, ${(1 - d / MAX_DIST) * 0.18})`;
+          ctx.lineWidth = 0.8;
           ctx.stroke();
         }
       }
     }
+    raf = requestAnimationFrame(draw);
   }
 
-  function frame() {
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-    particles.forEach(p => { p.update(); p.draw(); });
-    drawLines();
-    raf = requestAnimationFrame(frame);
+  // Start loop; pause when hero leaves viewport
+  const heroSection = canvas.closest('section');
+  if (heroSection) {
+    new IntersectionObserver(entries => {
+      const wasActive = active;
+      active = entries[0].isIntersecting;
+      if (active && !wasActive) draw();
+      else if (!active) cancelAnimationFrame(raf);
+    }, { threshold: 0 }).observe(heroSection);
   }
 
-  // Pause when hero is off-screen
-  const heroEl = document.getElementById('home');
-  const visObs = new IntersectionObserver(entries => {
-    entries.forEach(e => {
-      if (e.isIntersecting) {
-        if (!raf) raf = requestAnimationFrame(frame);
-      } else {
-        cancelAnimationFrame(raf);
-        raf = null;
-      }
-    });
-  }, { threshold: 0.01 });
-  if (heroEl) visObs.observe(heroEl);
+  draw();
+}
 
-  resize();
-  buildParticles();
-  frame();
-
-  let resizeTimer;
-  window.addEventListener('resize', () => {
-    clearTimeout(resizeTimer);
-    resizeTimer = setTimeout(() => { resize(); buildParticles(); }, 150);
-  });
-})();
-
-/* ---------- NAVIGATION ---------- */
-(function initNav() {
-  const nav       = document.getElementById('nav');
-  const burger    = document.getElementById('navBurger');
-  const links     = document.getElementById('navLinks');
-  const linkItems = document.querySelectorAll('.nav__link');
-
-  function onScroll() {
-    nav.classList.toggle('scrolled', window.scrollY > 40);
-    highlightActiveLink();
-  }
-  window.addEventListener('scroll', onScroll, { passive: true });
-  onScroll();
-
-  function setNavOpen(open) {
-    links.classList.toggle('open', open);
-    burger.classList.toggle('open', open);
-    burger.setAttribute('aria-expanded', open);
-    links.setAttribute('aria-hidden', !open);
-  }
-
-  burger.addEventListener('click', () => setNavOpen(!links.classList.contains('open')));
-
-  linkItems.forEach(link => {
-    link.addEventListener('click', () => setNavOpen(false));
-  });
-
-  function highlightActiveLink() {
-    const sections = document.querySelectorAll('section[id]');
-    const scrollY  = window.scrollY + 100;
-
-    sections.forEach(sec => {
-      const top    = sec.offsetTop;
-      const height = sec.offsetHeight;
-      const id     = sec.getAttribute('id');
-      if (scrollY >= top && scrollY < top + height) {
-        linkItems.forEach(l => {
-          l.classList.toggle('active', l.getAttribute('href') === `#${id}`);
-        });
-      }
-    });
-  }
-})();
-
-/* ---------- SMOOTH SCROLL (respects nav height) ---------- */
-(function initSmoothScroll() {
-  const NAV_H = parseInt(
-    getComputedStyle(document.documentElement).getPropertyValue('--nav-h')
-  ) || 68;
-
-  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener('click', function (e) {
-      e.preventDefault();
-      const target = document.querySelector(this.getAttribute('href'));
-      if (target) {
-        window.scrollTo({ top: target.offsetTop - NAV_H, behavior: 'smooth' });
-      }
-    });
-  });
-})();
-
-/* ---------- SCROLL REVEAL ---------- */
-(function initReveal() {
-  const els = document.querySelectorAll('.reveal');
-
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (!entry.isIntersecting) return;
-
-      const parent   = entry.target.parentElement;
-      const siblings = parent ? [...parent.querySelectorAll('.reveal:not(.visible)')] : [];
-      const idx      = siblings.indexOf(entry.target);
-      const delay    = idx > 0 ? idx * 70 : 0;
-
-      setTimeout(() => {
-        entry.target.classList.add('visible');
-      }, delay);
-
-      observer.unobserve(entry.target);
-    });
-  }, {
-    threshold: 0.08,
-    rootMargin: '0px 0px -40px 0px',
-  });
-
-  els.forEach(el => observer.observe(el));
-})();
-
-/* ---------- STAT COUNTERS (About section) ---------- */
-(function initCounters() {
-  const counters = document.querySelectorAll('.about__stat-val[data-count]');
+/* ============================================================
+   COUNTER ANIMATION
+   ============================================================ */
+function initCounters() {
+  const counters = document.querySelectorAll('[data-count]');
   if (!counters.length) return;
 
-  const observer = new IntersectionObserver((entries) => {
+  const ease = t => 1 - Math.pow(1 - t, 3);
+
+  const observer = new IntersectionObserver(entries => {
     entries.forEach(entry => {
       if (!entry.isIntersecting) return;
       const el     = entry.target;
       const target = parseInt(el.dataset.count, 10);
       const dur    = 1400;
       const start  = performance.now();
+      observer.unobserve(el);
 
       function tick(now) {
-        const elapsed  = now - start;
-        const progress = Math.min(elapsed / dur, 1);
-        const eased    = 1 - Math.pow(1 - progress, 3);
-        el.textContent = Math.floor(eased * target);
-        if (progress < 1) requestAnimationFrame(tick);
-        else el.textContent = target;
+        const p  = Math.min((now - start) / dur, 1);
+        el.textContent = Math.round(ease(p) * target);
+        if (p < 1) requestAnimationFrame(tick);
       }
-
       requestAnimationFrame(tick);
-      observer.unobserve(el);
     });
-  }, { threshold: 0.6 });
+  }, { threshold: 0.5 });
 
   counters.forEach(el => observer.observe(el));
-})();
+}
 
-/* ---------- CONTACT FORM ---------- */
-(function initForm() {
+/* ============================================================
+   CONTACT FORM — Formspree integration
+   ============================================================ */
+function initForm() {
   const form       = document.getElementById('contactForm');
   const successEl  = document.getElementById('formSuccess');
-  const netErrEl   = document.getElementById('formNetError');
-  const btn        = document.getElementById('submitBtn');
   const resetBtn   = document.getElementById('resetFormBtn');
-  if (!form || !btn) return;
+  const submitBtn  = document.getElementById('submitBtn');
+  const netErr     = document.getElementById('formNetError');
+  if (!form) return;
 
-  const ENDPOINT = 'https://formspree.io/f/xppzyqvo';
+  let submitting = false;
 
-  const fields = {
-    name:    { el: document.getElementById('contactName'),    err: document.getElementById('nameError'),    field: document.getElementById('fieldName')    },
-    email:   { el: document.getElementById('contactEmail'),   err: document.getElementById('emailError'),   field: document.getElementById('fieldEmail')   },
-    message: { el: document.getElementById('contactMessage'), err: document.getElementById('messageError'), field: document.getElementById('fieldMessage') },
-  };
-
-  const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
-
+  // Validators
   function validateName(val) {
-    if (!val.trim()) return 'Name is required.';
+    if (!val.trim()) return 'Please enter your name.';
     if (val.trim().length < 2) return 'Name must be at least 2 characters.';
     return '';
   }
   function validateEmail(val) {
-    if (!val.trim()) return 'Email is required.';
-    if (!EMAIL_RE.test(val.trim())) return 'Please enter a valid email address.';
+    if (!val.trim()) return 'Please enter your email.';
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(val.trim())) return 'Please enter a valid email address.';
     return '';
   }
   function validateMessage(val) {
-    if (!val.trim()) return 'Message is required.';
+    if (!val.trim()) return 'Please enter a message.';
     if (val.trim().length < 10) return 'Message must be at least 10 characters.';
     return '';
   }
 
-  const validators = { name: validateName, email: validateEmail, message: validateMessage };
-
-  function showError(key, msg) {
-    const f = fields[key];
-    f.err.textContent = msg;
-    f.field.classList.toggle('form-field--error', !!msg);
+  function setError(fieldId, errId, msg) {
+    const field = document.getElementById(fieldId);
+    const errEl = document.getElementById(errId);
+    if (!field || !errEl) return;
+    if (msg) {
+      field.classList.add('has-error');
+      errEl.textContent = msg;
+    } else {
+      field.classList.remove('has-error');
+      errEl.textContent = '';
+    }
   }
 
-  function validateField(key) {
-    const f   = fields[key];
-    const msg = validators[key](f.el.value);
-    showError(key, msg);
-    return !msg;
-  }
-
-  // Blur validation
-  Object.keys(fields).forEach(key => {
-    fields[key].el.addEventListener('blur', () => validateField(key));
-    fields[key].el.addEventListener('input', () => {
-      // clear error once user starts correcting
-      if (fields[key].field.classList.contains('form-field--error')) {
-        validateField(key);
-      }
-    });
+  // Live clear on input
+  form.querySelector('#contactName')?.addEventListener('input', e => {
+    setError('fieldName', 'nameError', validateName(e.target.value));
   });
-
-  function setLoading(on) {
-    btn.classList.toggle('loading', on);
-    btn.disabled = on;
-  }
-
-  function hideNetError() {
-    if (netErrEl) { netErrEl.textContent = ''; netErrEl.classList.remove('visible'); }
-  }
-
-  let submitting = false;
+  form.querySelector('#contactEmail')?.addEventListener('input', e => {
+    setError('fieldEmail', 'emailError', validateEmail(e.target.value));
+  });
+  form.querySelector('#contactMessage')?.addEventListener('input', e => {
+    setError('fieldMessage', 'messageError', validateMessage(e.target.value));
+  });
 
   form.addEventListener('submit', async e => {
     e.preventDefault();
     if (submitting) return;
 
-    hideNetError();
+    const name    = form.querySelector('#contactName')?.value || '';
+    const email   = form.querySelector('#contactEmail')?.value || '';
+    const message = form.querySelector('#contactMessage')?.value || '';
 
-    // Validate all fields
-    const validName    = validateField('name');
-    const validEmail   = validateField('email');
-    const validMessage = validateField('message');
-    if (!validName || !validEmail || !validMessage) {
-      // Focus first error
-      for (const key of ['name', 'email', 'message']) {
-        if (fields[key].field.classList.contains('form-field--error')) {
-          fields[key].el.focus();
-          break;
-        }
-      }
-      return;
-    }
+    const nameErr    = validateName(name);
+    const emailErr   = validateEmail(email);
+    const messageErr = validateMessage(message);
+
+    setError('fieldName',    'nameError',    nameErr);
+    setError('fieldEmail',   'emailError',   emailErr);
+    setError('fieldMessage', 'messageError', messageErr);
+
+    if (nameErr || emailErr || messageErr) return;
+
+    // Hide previous net error
+    if (netErr) { netErr.textContent = ''; netErr.classList.remove('visible'); }
 
     submitting = true;
-    setLoading(true);
+    submitBtn.classList.add('loading');
+    submitBtn.disabled = true;
 
     try {
       const data = new FormData(form);
-      const res  = await fetch(ENDPOINT, {
-        method:  'POST',
-        body:    data,
-        headers: { Accept: 'application/json' },
+      const res  = await fetch('https://formspree.io/f/xppzyqvo', {
+        method: 'POST',
+        body: data,
+        headers: { Accept: 'application/json' }
       });
 
       if (res.ok) {
-        // Show success state
-        form.style.display   = 'none';
-        if (successEl) successEl.classList.add('visible');
+        form.classList.add('hidden');
+        if (successEl) {
+          successEl.classList.add('visible');
+          successEl.setAttribute('aria-live', 'polite');
+        }
       } else {
-        const json = await res.json().catch(() => ({}));
-        const msg  = (json.errors && json.errors.map(x => x.message).join(', ')) ||
-                     `Server error (${res.status}). Please try again.`;
-        if (netErrEl) { netErrEl.textContent = msg; netErrEl.classList.add('visible'); }
+        const body = await res.json().catch(() => ({}));
+        const msg = body?.errors?.[0]?.message || 'Something went wrong. Please try again.';
+        if (netErr) { netErr.textContent = msg; netErr.classList.add('visible'); }
+        submitBtn.classList.remove('loading');
+        submitBtn.disabled = false;
+        submitting = false;
       }
     } catch {
-      if (netErrEl) {
-        netErrEl.textContent = 'Network error — please check your connection and try again.';
-        netErrEl.classList.add('visible');
+      if (netErr) {
+        netErr.textContent = 'Unable to send. Please check your connection and try again.';
+        netErr.classList.add('visible');
       }
-    } finally {
+      submitBtn.classList.remove('loading');
+      submitBtn.disabled = false;
       submitting = false;
-      setLoading(false);
     }
   });
 
-  // "Send Another Message" resets form and shows it again
+  // Reset button
   if (resetBtn) {
     resetBtn.addEventListener('click', () => {
       form.reset();
-      Object.keys(fields).forEach(key => showError(key, ''));
-      hideNetError();
-      form.style.display   = '';
+      form.classList.remove('hidden');
       if (successEl) successEl.classList.remove('visible');
-      fields.name.el.focus();
+      submitBtn.classList.remove('loading');
+      submitBtn.disabled = false;
+      submitting = false;
     });
   }
-})();
+}
 
-/* ---------- HERO VISUAL PARALLAX ---------- */
-(function initParallax() {
-  const visual  = document.getElementById('heroVisual');
-  const hero    = document.getElementById('home');
-  if (!visual || !hero) return;
-
-  const win_    = visual.querySelector('.hv-window');
-  let active    = true;
-
-  const obs = new IntersectionObserver(entries => {
-    active = entries[0].isIntersecting;
-  }, { threshold: 0.01 });
-  obs.observe(hero);
-
-  let cx = 0, cy = 0, tx = 0, ty = 0;
-
-  document.addEventListener('mousemove', e => {
-    if (!active) return;
-    const rect = hero.getBoundingClientRect();
-    tx = ((e.clientX - rect.left) / rect.width  - 0.5) * 2;
-    ty = ((e.clientY - rect.top)  / rect.height - 0.5) * 2;
-  });
-
-  function tick() {
-    if (active) {
-      cx += (tx - cx) * 0.055;
-      cy += (ty - cy) * 0.055;
-
-      visual.style.transform = `translate(${cx * 7}px, ${cy * 5}px)`;
-
-      if (win_) {
-        win_.style.transform =
-          `translate(calc(-50% + ${cx * -3}px), calc(-50% + ${cy * -2}px))`;
-      }
-    }
-    requestAnimationFrame(tick);
-  }
-  tick();
-})();
-
-/* ---------- FOOTER YEAR ---------- */
-(function setYear() {
+/* ============================================================
+   FOOTER YEAR
+   ============================================================ */
+function setYear() {
   const el = document.getElementById('footerYear');
   if (el) el.textContent = new Date().getFullYear();
-})();
+}
+
+/* ============================================================
+   INIT
+   ============================================================ */
+document.addEventListener('DOMContentLoaded', () => {
+  setYear();
+  initCursor();
+  initNav();
+  initSmoothScroll();
+  initHeroVerb();
+  initCanvas();
+  initReveal();
+  initLineReveal();
+  initCounters();
+  initForm();
+});
