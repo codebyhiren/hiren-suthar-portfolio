@@ -114,18 +114,17 @@
   window.addEventListener('scroll', onScroll, { passive: true });
   onScroll();
 
-  burger.addEventListener('click', () => {
-    const open = links.classList.toggle('open');
+  function setNavOpen(open) {
+    links.classList.toggle('open', open);
     burger.classList.toggle('open', open);
     burger.setAttribute('aria-expanded', open);
-  });
+    links.setAttribute('aria-hidden', !open);
+  }
+
+  burger.addEventListener('click', () => setNavOpen(!links.classList.contains('open')));
 
   linkItems.forEach(link => {
-    link.addEventListener('click', () => {
-      links.classList.remove('open');
-      burger.classList.remove('open');
-      burger.setAttribute('aria-expanded', 'false');
-    });
+    link.addEventListener('click', () => setNavOpen(false));
   });
 
   function highlightActiveLink() {

@@ -3,15 +3,75 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Hiren Suthar — Full Stack Developer. Building modern, scalable, high-performance web applications.">
+
+  <!-- Primary SEO -->
   <title>Hiren Suthar — Full Stack Developer</title>
+  <meta name="description" content="Hiren Suthar is a Full Stack Developer specializing in Angular, React, NestJS and TypeScript — building modern, scalable, high-performance web applications.">
+  <meta name="author" content="Hiren Suthar">
+  <meta name="robots" content="index, follow">
+  <!-- Update the canonical URL to your deployed domain -->
+  <link rel="canonical" href="https://hirensuthar.dev/">
+
+  <!-- Open Graph (Facebook / LinkedIn / WhatsApp) -->
+  <meta property="og:type"        content="website">
+  <meta property="og:url"         content="https://hirensuthar.dev/">
+  <meta property="og:title"       content="Hiren Suthar — Full Stack Developer">
+  <meta property="og:description" content="Full Stack Developer specializing in Angular, React, NestJS and TypeScript. Building modern, scalable web applications.">
+  <!-- Create a 1200×630 og-image.png and place it in the root folder -->
+  <meta property="og:image"       content="https://hirensuthar.dev/og-image.png">
+  <meta property="og:image:width"  content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt"    content="Hiren Suthar — Full Stack Developer portfolio">
+  <meta property="og:site_name"   content="Hiren Suthar">
+  <meta property="og:locale"      content="en_US">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card"        content="summary_large_image">
+  <meta name="twitter:title"       content="Hiren Suthar — Full Stack Developer">
+  <meta name="twitter:description" content="Full Stack Developer specializing in Angular, React, NestJS and TypeScript.">
+  <meta name="twitter:image"       content="https://hirensuthar.dev/og-image.png">
+  <meta name="twitter:image:alt"   content="Hiren Suthar — Full Stack Developer portfolio">
+
+  <!-- Theme / PWA -->
+  <meta name="theme-color" content="#080808">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <link rel="icon" type="image/x-icon"  href="/favicon.ico">
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+  <link rel="manifest" href="/site.webmanifest">
+
+  <!-- Fonts — preconnect first, then load; weight 300 removed (unused) -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <!-- Icons CDN -->
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@v2.16.0/devicon.min.css">
+
+  <!-- Styles -->
   <link rel="stylesheet" href="css/style.css">
+
+  <!-- Structured data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Hiren Suthar",
+    "jobTitle": "Full Stack Developer",
+    "description": "Full Stack Developer specializing in Angular, React, NestJS and TypeScript. Building modern, scalable, high-performance web applications.",
+    "url": "https://hirensuthar.dev/",
+    "worksFor": {
+      "@type": "Organization",
+      "name": "Kwiqwork Tech Studio LLP"
+    },
+    "knowsAbout": ["Angular", "React", "TypeScript", "NestJS", "Node.js", "PostgreSQL", "MySQL", "SQL Server", ".NET", "JavaScript", "HTML5", "CSS3"]
+  }
+  </script>
 </head>
 <body>
+
+<!-- Skip to main content (keyboard / screen-reader shortcut) -->
+<a href="#main-content" class="skip-link">Skip to main content</a>
 
 <!-- Grain overlay -->
 <div class="grain" aria-hidden="true"></div>
@@ -19,10 +79,25 @@
 <!-- ============================================================
      NAVIGATION
      ============================================================ -->
-<nav class="nav" id="nav">
+<nav class="nav" id="nav" aria-label="Main navigation">
   <div class="container nav__inner">
-    <a href="#home" class="nav__logo">&lt;HS/&gt;</a>
-    <ul class="nav__links" id="navLinks">
+    <a href="#home" class="nav__logo" aria-label="Hiren Suthar — Home">
+      <svg class="logo-mark" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <rect x="0.5" y="0.5" width="35" height="35" rx="5.5" stroke="rgba(225,29,72,0.45)" stroke-width="1"/>
+        <g stroke="#f4f4f5" stroke-width="2.8" stroke-linecap="round">
+          <line x1="7" y1="7" x2="7" y2="29"/>
+          <line x1="18" y1="7" x2="18" y2="29"/>
+          <line x1="7" y1="18" x2="18" y2="18"/>
+        </g>
+        <path d="M28,7 C28,5.5 18,5.5 18,14 C18,20 28,20 28,22 C28,30.5 18,30.5 18,29"
+              stroke="#e11d48" stroke-width="2.8" stroke-linecap="round"/>
+      </svg>
+      <span class="logo-wordmark" aria-hidden="true">
+        <span class="logo-wordmark__first">Hiren</span>
+        <span class="logo-wordmark__last">Suthar</span>
+      </span>
+    </a>
+    <ul class="nav__links" id="navLinks" aria-hidden="true">
       <li><a href="#home"       class="nav__link">Home</a></li>
       <li><a href="#about"      class="nav__link">About</a></li>
       <li><a href="#skills"     class="nav__link">Skills</a></li>
@@ -37,6 +112,11 @@
     </button>
   </div>
 </nav>
+
+<!-- ============================================================
+     MAIN CONTENT
+     ============================================================ -->
+<main id="main-content">
 
 <!-- ============================================================
      HERO
@@ -80,8 +160,8 @@
       </div>
     </div>
 
-    <!-- RIGHT: developer visual -->
-    <div class="hero__right reveal">
+    <!-- RIGHT: developer visual (decorative) -->
+    <div class="hero__right reveal" aria-hidden="true">
       <div class="hero__visual" id="heroVisual">
         <div class="hv-grid"></div>
         <div class="hv-orb"></div>
@@ -356,7 +436,7 @@
         <div class="timeline__card">
           <div class="timeline__head">
             <div>
-              <div class="timeline__role">Jr. Software Developer</div>
+              <h3 class="timeline__role">Jr. Software Developer</h3>
               <div class="timeline__company">Kwiqwork Tech Studio LLP</div>
             </div>
             <div class="timeline__period">
@@ -563,12 +643,25 @@
   </div>
 </section>
 
+</main><!-- /#main-content -->
+
 <!-- ============================================================
      FOOTER
      ============================================================ -->
 <footer class="footer">
   <div class="container footer__inner">
-    <a href="#home" class="footer__logo">&lt;HS/&gt;</a>
+    <a href="#home" class="footer__logo" aria-label="Hiren Suthar — Back to top">
+      <svg class="logo-mark" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <rect x="0.5" y="0.5" width="35" height="35" rx="5.5" stroke="rgba(225,29,72,0.45)" stroke-width="1"/>
+        <g stroke="#f4f4f5" stroke-width="2.8" stroke-linecap="round">
+          <line x1="7" y1="7" x2="7" y2="29"/>
+          <line x1="18" y1="7" x2="18" y2="29"/>
+          <line x1="7" y1="18" x2="18" y2="18"/>
+        </g>
+        <path d="M28,7 C28,5.5 18,5.5 18,14 C18,20 28,20 28,22 C28,30.5 18,30.5 18,29"
+              stroke="#e11d48" stroke-width="2.8" stroke-linecap="round"/>
+      </svg>
+    </a>
     <p class="footer__copy">Designed &amp; Built by Hiren Suthar</p>
     <p class="footer__year">&copy; <span id="footerYear"></span> Hiren Suthar. All rights reserved.</p>
   </div>

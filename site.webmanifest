@@ -1,0 +1,16 @@
+{
+  "name": "Hiren Suthar — Full Stack Developer",
+  "short_name": "Hiren Suthar",
+  "description": "Full Stack Developer specializing in Angular, React, NestJS and TypeScript.",
+  "start_url": "/",
+  "display": "browser",
+  "background_color": "#080808",
+  "theme_color": "#080808",
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml"
+    }
+  ]
+}

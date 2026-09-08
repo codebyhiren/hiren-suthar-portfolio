@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 36 36" fill="none">
+  <rect x="0.5" y="0.5" width="35" height="35" rx="5.5" fill="#080808" stroke="#e11d48" stroke-width="1.2" stroke-opacity="0.7"/>
+  <!-- H — white strokes -->
+  <line x1="7" y1="7" x2="7" y2="29" stroke="#f4f4f5" stroke-width="2.8" stroke-linecap="round"/>
+  <line x1="18" y1="7" x2="18" y2="29" stroke="#f4f4f5" stroke-width="2.8" stroke-linecap="round"/>
+  <line x1="7" y1="18" x2="18" y2="18" stroke="#f4f4f5" stroke-width="2.8" stroke-linecap="round"/>
+  <!-- S — crimson; left endpoints share H's right bar -->
+  <path d="M28,7 C28,5.5 18,5.5 18,14 C18,20 28,20 28,22 C28,30.5 18,30.5 18,29"
+        stroke="#e11d48" stroke-width="2.8" stroke-linecap="round"/>
+</svg>
